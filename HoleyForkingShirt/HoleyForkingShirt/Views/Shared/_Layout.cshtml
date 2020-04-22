@@ -12,7 +12,7 @@
 <body>
     @if (SignInManager.IsSignedIn(User))
     {
-       
+       <span> Welcome back, @User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value</span>
         <form asp-page="/Account/Logout">
             <button type="submit">Log Out</button>
         </form>
