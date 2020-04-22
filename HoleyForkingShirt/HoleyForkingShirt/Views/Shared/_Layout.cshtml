@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using HoleyForkingShirt.Models
+@using System.Security.Claims
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    @if (SignInManager.IsSignedIn(User))
+    {
+       
+        <form asp-page="/Account/Logout">
+            <button type="submit">Log Out</button>
+        </form>
+    }
+    else
+    {
+        <form asp-page="/Account/Login"><button type="submit">Log In</button></form>
+        <form asp-page="/Account/Register"><button type="submit">New User?</button></form>
+    }
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
+
