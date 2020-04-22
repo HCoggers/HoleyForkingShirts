@@ -1,0 +1,37 @@
+﻿@page
+@model HoleyForkingShirt.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+    <form method="post">
+
+        <div asp-validation-summary="All"></div>
+        <hr />
+        <label asp-for="RegisterData.Email"></label>
+        <input asp-for="RegisterData.Email" />
+        <span asp-validation-for="RegisterData.Email"></span>
+
+        <label asp-for="RegisterData.FirstName"></label>
+        <input asp-for="RegisterData.FirstName" />
+        <span asp-validation-for="RegisterData.FirstName"></span>
+
+        <label asp-for="RegisterData.LastName"></label>
+        <input asp-for="RegisterData.LastName" />
+        <span asp-validation-for="RegisterData.LastName"></span>
+
+        <label asp-for="RegisterData.Birthday"></label>
+        <input asp-for="RegisterData.Birthday" />
+        <span asp-validation-for="RegisterData.Birthday"></span>
+
+        <label asp-for="RegisterData.Password"></label>
+        <input asp-for="RegisterData.Password" />
+        <span asp-validation-for="RegisterData.Password"></span>
+
+        <label asp-for="RegisterData.ConfirmPassword"></label>
+        <input asp-for="RegisterData.ConfirmPassword" />
+        <span asp-validation-for="RegisterData.ConfirmPassword"></span>
+
+        <button type="submit">CLICK TO REGISTER</button>
+
+    </form>
