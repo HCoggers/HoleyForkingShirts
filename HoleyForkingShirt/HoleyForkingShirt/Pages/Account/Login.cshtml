@@ -1,0 +1,17 @@
+﻿@page
+@model HoleyForkingShirt.Pages.Account.LoginModel
+@{
+}
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <label asp-for="Input.Email"></label>
+    <input asp-for="Input.Email" />
+    <span asp-validation-for="Input.Email"></span>
+
+    <label asp-for="Input.Password"></label>
+    <input asp-for="Input.Password" />
+    <span asp-validation-for="Input.Email"></span>
+
+    <button type="submit">LOGIN</button>
+</form>
