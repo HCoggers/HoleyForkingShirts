@@ -97,7 +97,7 @@ namespace HoleyForkingShirt.Pages.Account
 
             [Required]
             [DataType(DataType.Password)]
-            [Compare("Password", ErrorMessage = "The password doesnt match. Just like the products we sell.")]
+            [Compare("Password", ErrorMessage = "The passwords don't match. Just like the products we sell.")]
             public string ConfirmPassword { get; set; }
 
         }
