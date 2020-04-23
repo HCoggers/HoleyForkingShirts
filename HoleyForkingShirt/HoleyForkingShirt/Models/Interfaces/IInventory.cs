@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HoleyForkingShirt.Models
 {
-    interface IInventory
+    public interface IInventory
     {
         // CREATE
         public Task<Product> CreateProduct(Product product);

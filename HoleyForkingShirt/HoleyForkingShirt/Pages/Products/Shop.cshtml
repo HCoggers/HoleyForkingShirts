@@ -1,0 +1,27 @@
+﻿@page
+@model HoleyForkingShirt.Pages.Products.ShopModel
+@{
+      ViewData["Title"] = "Shop";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <p>Shop</p>
+    
+    <ul id="products">
+        @foreach (var product in Model.Inventory)
+        {
+            <li>
+                @product.Name
+                
+                <a asp-page="Products/Details/@product.ID"><img src ="@product.Image" /></a>
+            </li>
+        }
+
+    </ul>
+</body>
+</html>
