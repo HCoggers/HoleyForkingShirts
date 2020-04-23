@@ -12,6 +12,7 @@ using HoleyForkingShirt.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using HoleyForkingShirt.Models.Services;
 
 namespace HoleyForkingShirt
 {
@@ -46,6 +47,8 @@ namespace HoleyForkingShirt
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ProductionStoreConnection"));
             });
+
+            services.AddTransient<IInventory, InventoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
