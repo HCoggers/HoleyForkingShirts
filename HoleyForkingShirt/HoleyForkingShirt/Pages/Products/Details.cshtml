@@ -1,0 +1,21 @@
+﻿@page "{id:int?}"
+@model HoleyForkingShirt.Pages.Products.DetailsModel
+@{
+}
+@{
+    ViewData["Title"] = $"{Model.Product.Name}";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h2>@Model.Product.Name</h2>
+    <img src="@Model.Product.Image" />
+    <p>@Model.Product.Description</p>
+    <p>@Model.Product.Size</p>
+    <p>@Model.Product.Price</p>
+</body>
+</html>
