@@ -3,27 +3,25 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
     height: 100vh;
+    display: grid;
 }
 
-nav {
-    color: antiquewhite;
+nav > form {
+    text-align: right;
+    padding: 0;
 }
-    nav > form {
-        text-align: right;
-        padding: 0;
+    nav>form>button {
+        padding: .5em 1em;
+        background-color: transparent;
+        border: none;
+        color:aquamarine;
     }
-        nav>form>button {
-            padding: .5em 1em;
-            background-color: transparent;
-            border: none;
-            color:aquamarine;
-            transition-duration: 0.5s;
-        }
 
-            nav>form>button:hover {
-                color: #343a40;
-                background-color: aquamarine;
-            }
+        nav > form > button:hover {
+            transition-duration: 0.5s;
+            color: #343a40;
+            background-color: aquamarine;
+        }
 
 h2, h1 {
     font-family: 'Montserrat', sans-serif;
@@ -41,9 +39,10 @@ a, a:hover {
 main {
     max-width: 960px;
     margin: 0 auto;
-    background-color: hsla(250, 100%, 5%, 0.70);
+    background-color: hsla(200, 100%, 5%, 0.70);
     color: antiquewhite ;
     font-family: 'Montserrat', sans-serif;
+    display: grid;
 }
 .row {
     width: 100%;
@@ -71,7 +70,8 @@ main {
     font-weight: bold;
     font-size: 80px;
     text-align: center;
-    color: hsl(250, 100%, 5%)
+    color: hsl(200, 100%, 5%);
+    display: grid;
 }
     #featured>* {
         background-color: hsla(34, 78%, 91%, 0.7);
@@ -83,21 +83,30 @@ main {
         font-size: 20px;
         text-align: center;
     }
+    #featured:hover {
+    }
+        #featured:hover > * {
+            transition-duration: .5s;
+            background-color: hsl(34, 78%, 91%);
+        }
 
 #yes{
     color: hsla(0, 0%, 0%, 0.00);
 }
 
 #shop {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: antiquewhite;
-    position: absolute;
     font-size: 500%;
     font-family: 'Dancing Script', cursive;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
+    #shop:hover {
+        transition-duration: .5s;
+        background-color: hsl(200, 100%, 5%);
+        color:aliceblue;
+    }
 
 .name{
     color:red;
@@ -109,11 +118,19 @@ main {
     object-fit: cover;
 }
 
+footer {
+    background-color: aliceblue;
+    color: #343a40;
+}
+
 @media only screen and (max-width: 900px) {
     .navbar-text, nav .subtitle {
         display: none;
     }
     #title {
         font-size: 10vw;
+    }
+    #featured>p {
+        display: none;
     }
 }
