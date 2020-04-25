@@ -18,10 +18,10 @@
         <div class="row">
             @foreach (var product in Model.Inventory)
             {
-                <div class="col-4">
+                <div class="col-4 product">
                     @product.Name
 
-                    <a asp-page="/Products/Details" asp-route-id="@product.ID"><img src="@product.Image" class="img-fluid img-thumbnail"/></a>
+                    <a asp-page="/Products/Details" asp-route-id="@product.ID"><img src="@product.Image" class="img-fluid"/></a>
                 </div>
             }
         </div>
