@@ -1,26 +1,57 @@
-﻿@{ 
-    Layout = "_Layout";
-}
+﻿@using Microsoft.AspNetCore.Identity
+@using HoleyForkingShirt.Models
+@using System.Security.Claims
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="~/StyleSheet.css" />
-        <title>Holey Forking Shirts: Hello!</title>
-    </head>
-    <body>
-        <div id="title">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Holey Forking Shirts: Hello!</title>
+    <link rel="stylesheet" type="text/css" href="~/reset.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/StyleSheet.css" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" asp-page="/">
+            <h2>HFShirts <span class="subtitle">Every shirt deserves a second chance</span></h2>
+        </a>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <span class="navbar-text ml-auto"> Welcome back, @User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value.Split(' ')[0]!</span>
+            <form class="form-inline ml-3" asp-page="/Account/Logout">
+                <button type="submit">Log Out</button>
+            </form>
+        }
+        else
+        {
+            <span class="navbar-text ml-auto">Welcome!</span>
+            <form class="form-inline ml-3" asp-page="/Account/Login"><button type="submit">Login</button></form>
+            <form class="form-inline" asp-page="/Account/Register"><button type="submit">Register</button></form>
+        }
+    </nav>
+    <main>
+        <div class="row" id="title">
             <p>Welcome to Holey Forking Shirts!</p>
         </div>
-        
-        <p id="featured">
-            Featured Product!!!! <br />
-        </p>
-        <p id="featured2">
-            Holey Blue Socks <br />
-            Give that right big toe some breathing room with these un-darned socks!
-        </p>
-        <p id="yes"> jon smells. jk best grader ever</p>
-        <img src="https://i.imgur.com/qFObFkC.jpg" id="toes"  />
-       
-    </body>
+        <div class="row">
+            <a class="col-6" asp-page="/Products/Shop">
+                <div id="shop">
+                    Shop
+                </div>
+            </a>
+            <div class="col-6" id="featured">
+                <h3 class="subtitle">Featured Product</h3>
+                <p>
+                    Holey Blue Socks <br />
+                    Give that right big toe some breathing room with these un-darned socks!
+                </p>
+                <p id="yes"> jon smells. jk best grader ever</p>
+            </div>
+        </div>
+    </main>
+    
+</body>
 </html>

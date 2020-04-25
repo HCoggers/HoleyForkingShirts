@@ -7,39 +7,34 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>Holey Forking Shirts: @ViewBag.Title</title>
     <link rel="stylesheet" type="text/css" href="~/reset.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/StyleSheet.css" />
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <ul>
-            @if (ViewBag.Title != "Home")
-            {
-                <li><a asp-page="/">Home</a></li>
-            }
-            @if (ViewBag.Title != "Shop")
-            {
-                <li><a asp-page="/Products/Shop">Shop</a></li>
-            }
-        </ul>
+        <a class="navbar-brand" asp-page="/">
+            <h2>HFShirts <span class="subtitle">Every shirt deserves a second chance</span></h2>
+        </a>
         @if (SignInManager.IsSignedIn(User))
         {
-            <span> Welcome back, @User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value</span>
-            <form asp-page="/Account/Logout">
+            <span class="navbar-text ml-auto"> Welcome back, @User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value.Split(' ')[0]!</span>
+            <form class="form-inline ml-3" asp-page="/Account/Logout">
                 <button type="submit">Log Out</button>
             </form>
         }
         else
         {
-            <form asp-page="/Account/Login"><button type="submit">Login</button></form>
-            <form asp-page="/Account/Register"><button type="submit">Register</button></form>
+            <span class="navbar-text ml-auto">Welcome!</span>
+            <form class="form-inline ml-3" asp-page="/Account/Login"><button type="submit">Login</button></form>
+            <form class="form-inline" asp-page="/Account/Register"><button type="submit">Register</button></form>
         }
     </nav>
-    <main>
+    <div>
         @RenderBody()
-    </main>
+    </div>
 </body>
 </html>
 

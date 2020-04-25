@@ -1,40 +1,111 @@
 ﻿body {
-    background-color: beige
-    
+    background-image: url(https://www.publicdomainpictures.net/pictures/210000/velka/cloth-background-1489327148qPl.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
+
+nav {
+    color: antiquewhite;
+}
+    nav > form {
+        text-align: right;
+        padding: 0;
+    }
+        nav>form>button {
+            padding: .5em 1em;
+            background-color: transparent;
+            border: none;
+            color:aquamarine;
+            transition-duration: 0.5s;
+        }
+
+            nav>form>button:hover {
+                color: #343a40;
+                background-color: aquamarine;
+            }
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: 80%;
+}
+
+main {
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: hsla(250, 100%, 5%, 0.70);
+    color: antiquewhite ;
+    font-family: 'Montserrat', sans-serif;
+}
+
 #title{
+    margin: 0 auto;
+    width: 50%;
     text-align:center;
-    
     font-weight:bold;
     font-size:50px;
     border-style:dashed;
 }
-#featured{
-    font-weight:bold;
-    padding-top:100px;
-    font-size:20px;
-    text-align:center;
-
-}
-#featured2 {
-    font-size: 20px;
+#featured {
+    background-image: url(https://i.imgur.com/qFObFkC.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0;
+    font-weight: bold;
+    font-size: 80px;
     text-align: center;
+    color: hsl(250, 100%, 5%)
 }
+    #featured>* {
+        background-color: hsla(34, 78%, 91%, 0.7);
+        margin: 0;
+        padding: 1em .5em;
+    }
+    #featured>p {
+        padding: 1em 2em;
+        font-size: 20px;
+        text-align: center;
+    }
 
-#toes{
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-
-    
-    
-    
-}
 #yes{
-    color:beige;
+    color: hsla(0, 0%, 0%, 0.00);
+}
+
+#shop {
+    text-align: center;
+    color: antiquewhite;
+    position: absolute;
+    font-size: 500%;
+    font-family: 'Dancing Script', cursive;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .name{
     color:red;
-    
+}
+
+.img-fluid {
+    height: 20vw;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 900px) {
+    .navbar-text, nav .subtitle {
+        display: none;
+    }
+    #title {
+        font-size: 10vw;
+    }
 }
