@@ -48,14 +48,13 @@ namespace HoleyForkingShirt.Pages.Account
                 {
 
                     Claim fullName = new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LatName}", ClaimValueTypes.String);
-                    Claim userName = new Claim(ClaimTypes.Name, user.UserName, ClaimValueTypes.String);
                     Claim birthday = new Claim(
                         ClaimTypes.DateOfBirth, 
                         new DateTime(user.BirthDate.Year, user.BirthDate.Month, user.BirthDate.Day).ToString("u"),
                         ClaimValueTypes.DateTime);
                     Claim email = new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email);
 
-                    List<Claim> claims = new List<Claim> { fullName, userName, birthday, email };
+                    List<Claim> claims = new List<Claim> { fullName, birthday, email };
 
                     await _userManager.AddClaimsAsync(user, claims);
                     await _signInManager.SignInAsync(user, isPersistent: false);

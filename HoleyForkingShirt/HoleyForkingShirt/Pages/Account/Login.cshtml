@@ -1,8 +1,9 @@
 ﻿@page
 @model HoleyForkingShirt.Pages.Account.LoginModel
 @{
+    Layout = "_Layout";
+    ViewData["Title"] = "Login";
 }
-
 <form method="post">
     <div asp-validation-summary="All"></div>
     <label asp-for="Input.Email"></label>

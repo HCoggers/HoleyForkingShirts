@@ -1,40 +1,146 @@
 ﻿body {
-    background-color: beige
-    
+    background-image: url(https://www.publicdomainpictures.net/pictures/210000/velka/cloth-background-1489327148qPl.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: grid;
 }
+nav > form {
+    text-align: right;
+    padding: 0;
+}
+    nav>form>button {
+        padding: .5em 1em;
+        background-color: transparent;
+        border: none;
+        color:aquamarine;
+    }
+
+        nav > form > button:hover {
+            transition-duration: 0.5s;
+            color: #343a40;
+            background-color: aquamarine;
+        }
+
+h2, h1 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: 80%;
+}
+
+main {
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: hsla(200, 100%, 5%, 0.70);
+    color: antiquewhite ;
+    font-family: 'Montserrat', sans-serif;
+    display: grid;
+}
+.row {
+    width: 100%;
+    margin: 0;
+}
+
 #title{
+    margin: 0 auto;
+    width: 70%;
     text-align:center;
-    
     font-weight:bold;
-    font-size:50px;
     border-style:dashed;
 }
-#featured{
-    font-weight:bold;
-    padding-top:100px;
-    font-size:20px;
-    text-align:center;
+    #title > h1 {
+        font-size: 60px;
+        padding: .5em;
+    }
 
-}
-#featured2 {
-    font-size: 20px;
+#featured {
+    background-image: url(https://i.imgur.com/qFObFkC.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0;
+    font-weight: bold;
+    font-size: 80px;
     text-align: center;
+    color: hsl(200, 100%, 5%);
+    display: grid;
 }
+    #featured>* {
+        background-color: hsl(34, 78%, 91%);
+        margin: 0;
+        padding: .5em .5em;
+    }
+    #featured>p {
+        padding: 1em 2em;
+        font-size: 20px;
+        text-align: center;
+    }
+        #featured:hover > * {
+            transition-duration: 1s;
+            color: hsl(200, 100%, 10%);
+            background-color: hsla(34, 78%, 91%, 0.5);
+        }
 
-#toes{
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-
-    
-    
-    
-}
 #yes{
-    color:beige;
+    display: none;
 }
+
+#shop {
+    padding: 0;
+    color: antiquewhite;
+    font-size: 500%;
+    font-family: 'Dancing Script', cursive;
+    background-image: url(https://c1.wallpaperflare.com/preview/632/667/832/apparel-clothing-fashion-hangers.jpg)
+}
+    #shop > div {
+        background-color: hsl(200, 100%, 10%);
+        width: 100%;
+        height: 100%;
+    }
+        #shop > div > p {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    #shop:hover>div{
+        transition-duration: 1s;
+        background-color: hsla(200, 100%, 10%, 0.7);
+        color:aliceblue;
+    }
 
 .name{
     color:red;
-    
+}
+
+.img-fluid {
+    height: 20vw;
+    width: 100%;
+    object-fit: cover;
+}
+
+footer {
+    background-color: aliceblue;
+    text-align: center;
+    color: #343a40;
+}
+
+@media only screen and (max-width: 900px) {
+    .navbar-text, nav .subtitle {
+        display: none;
+    }
+    #title {
+        font-size: 10vw;
+    }
+    #featured>p {
+        display: none;
+    }
 }
