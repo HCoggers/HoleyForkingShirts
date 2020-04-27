@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using HoleyForkingShirt.Models
+@using System.Security.Claims
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/reset.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="~/StyleSheet.css" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <ul>
+            @if (ViewBag.Title != "Home")
+            {
+                <li><a asp-page="/">Home</a></li>
+            }
+            @if (ViewBag.Title != "Shop")
+            {
+                <li><a asp-page="/Products/Shop">Shop</a></li>
+            }
+        </ul>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <span> Welcome back, @User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value</span>
+            <form asp-page="/Account/Logout">
+                <button type="submit">Log Out</button>
+            </form>
+        }
+        else
+        {
+            <form asp-page="/Account/Login"><button type="submit">Login</button></form>
+            <form asp-page="/Account/Register"><button type="submit">Register</button></form>
+        }
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>
+
