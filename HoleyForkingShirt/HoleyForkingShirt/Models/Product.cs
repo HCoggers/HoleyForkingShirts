@@ -14,7 +14,6 @@ namespace HoleyForkingShirt.Models
         public string Description { get; set; }
         public Sizes Size { get; set; }
         public string Image { get; set; }
-       
     }
 
     public enum Sizes
