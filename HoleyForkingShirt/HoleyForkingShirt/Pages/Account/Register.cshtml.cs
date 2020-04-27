@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using HoleyForkingShirt.Models;
+using HoleyForkingShirt.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,14 +16,16 @@ namespace HoleyForkingShirt.Pages.Account
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private ICartManager _cartManager;
 
         [BindProperty]
         public RegisterInput RegisterData { get; set; }
 
-        public RegisterModel(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signIn)
+        public RegisterModel(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signIn, ICartManager cartManager)
         {
             _userManager = usermanager;
             _signInManager = signIn;
+            _cartManager = cartManager;
         }
 
         public void OnGet()
@@ -58,7 +61,15 @@ namespace HoleyForkingShirt.Pages.Account
 
                     await _userManager.AddClaimsAsync(user, claims);
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+
+
+                    Cart cart = new Cart
+                    {
+                        Email = user.Email
+                    };
+                    await _cartManager.CreateCart(cart);
+
+                     return RedirectToAction("Index", "Home");
                 }
 
                 foreach(var error in result.Errors)
