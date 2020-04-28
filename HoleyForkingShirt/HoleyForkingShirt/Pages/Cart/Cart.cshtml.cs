@@ -14,30 +14,31 @@ namespace HoleyForkingShirt.Pages.Cart
 {
     public class CartModel : PageModel
     {
-        private StoreDbContext _context; 
+        private ICartManager _cartManager; 
         public List<CartItems> InCart;
         private SignInManager<ApplicationUser> _signInManager;
         private UserManager<ApplicationUser> _userManager;
-        public CartModel(StoreDbContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public CartModel(ICartManager cartManager, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _cartManager = cartManager;
             _signInManager = signInManager;
             _userManager = userManager;
         }
-        public IActionResult OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             var signedIn = _signInManager.IsSignedIn(User);
             if (signedIn)
             {
                 var userId = _userManager.GetUserId(User);
-                Models.Cart cart = _context.Carts.First(c => c.UserId == userId);
-                if(cart.CartItems == null)
+                Models.Cart cart = await _cartManager.GetCart(userId);
+                List<CartItems> items = await _cartManager.GetAllItems(cart.ID);
+                if(items == null)
                 {
                     ModelState.AddModelError("", "You have no items in your cart.");
                     return RedirectToPage("/Products/Shop");
                 }
-                InCart = _context.CartItems.Where(i => i.CartID == cart.ID).ToList();
 
+                InCart = items;
                 return Page();
             }
             else

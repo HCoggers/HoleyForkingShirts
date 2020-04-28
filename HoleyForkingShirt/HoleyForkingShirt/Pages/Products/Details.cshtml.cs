@@ -35,7 +35,7 @@ namespace HoleyForkingShirt.Pages.Products
         public async Task<IActionResult> OnPost(string inputId)
         {
             int productId = Int32.Parse(inputId);
-            Models.Cart cart = _cartManager.GetCart(_userManager.GetUserId(User));
+            Models.Cart cart = await _cartManager.GetCart(_userManager.GetUserId(User));
             Product product = await _context.Products.FindAsync(productId);
 
             CartItems newItem = new CartItems

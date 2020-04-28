@@ -1,5 +1,6 @@
 ﻿using HoleyForkingShirt.Data;
 using HoleyForkingShirt.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +30,21 @@ namespace HoleyForkingShirt.Models.Services
             await _context.SaveChangesAsync();
         }
 
-        public Cart GetCart(string userId)
+        public async Task<Cart> GetCart(string userId)
         {
-            var cart = _context.Carts.First(c => c.UserId == userId);
-            return cart;
+            var carts = await _context.Carts.Where(c => c.UserId == userId)
+                .Include(c => c.CartItems)
+                .ToListAsync();
+
+            return carts.First();
+        }
+
+        public async Task<List<CartItems>> GetAllItems(int cartId)
+        {
+            var items = await _context.CartItems.Where(i => i.CartID == cartId)
+                .Include(i => i.Product)
+                .ToListAsync();
+            return items;
         }
 
         public async Task UpdateCart(int id, Cart cart)
