@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HoleyForkingShirt.Migrations
+namespace HoleyForkingShirt.Migrations.ApplicationDB
 {
-    public partial class intital : Migration
+    public partial class userinitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

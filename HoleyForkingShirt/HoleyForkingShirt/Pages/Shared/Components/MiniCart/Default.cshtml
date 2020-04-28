@@ -1,0 +1,12 @@
+﻿@model IEnumerable<HoleyForkingShirt.Models.CartItems>
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using HoleyForkingShirt.Models
+@inject UserManager<ApplicationUser> UserManager
+
+    <h3>@User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value.Split(' ')[0]'s Cart</h3>
+@foreach (var item in Model)
+{
+    <p>@item.Product.Name</p>
+    <p>@item.Qty</p>
+}

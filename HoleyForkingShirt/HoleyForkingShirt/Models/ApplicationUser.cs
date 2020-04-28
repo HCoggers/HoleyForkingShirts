@@ -11,6 +11,5 @@ namespace HoleyForkingShirt.Models
         public string FirstName { get; set; }
         public string LatName { get; set; }
         public DateTime BirthDate { get; set; }
-
     }
 }

@@ -63,9 +63,10 @@ namespace HoleyForkingShirt.Pages.Account
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
 
-                    Cart cart = new Cart
+                    Models.Cart cart = new Models.Cart
                     {
-                        Email = user.Email
+                        UserId = user.Id,
+                        CartItems = new List<CartItems>()
                     };
                     await _cartManager.CreateCart(cart);
 

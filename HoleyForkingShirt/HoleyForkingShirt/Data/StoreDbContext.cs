@@ -118,6 +118,7 @@ namespace HoleyForkingShirt.Data
                     Image = "https://imgur.com/XNFTeA1.jpg"
                 }
                 );
+
             modelBuilder.Entity<CartItems>().HasKey(c => new { c.CartID, c.ProductID });
         }
                 

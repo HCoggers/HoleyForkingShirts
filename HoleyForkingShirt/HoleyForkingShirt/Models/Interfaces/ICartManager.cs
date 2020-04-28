@@ -12,7 +12,10 @@ namespace HoleyForkingShirt.Models.Interfaces
         public Task<Cart> CreateCart(Cart cart);
 
         // READ
-        public Task<Cart> GetCart(string email);
+        public Task<Cart> GetCart(string userId);
+
+        public Task<List<CartItems>> GetAllItems(int cartId);
+
 
         // UPDATE
         public Task UpdateCart(int id, Cart cart);
