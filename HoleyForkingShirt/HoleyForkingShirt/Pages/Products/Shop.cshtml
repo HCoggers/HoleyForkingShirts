@@ -15,7 +15,10 @@
     <div asp-validation-summary="All"></div>
     <p>Shop</p>
 
+    @await Component.InvokeAsync("MiniCart");
+
     <div class="container">
+
         <div class="row">
             @foreach (var product in Model.Inventory)
             {
