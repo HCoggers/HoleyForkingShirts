@@ -7,9 +7,10 @@ namespace HoleyForkingShirt.Models
 {
     public class CartItems
     {
-        public string CartID { get; set; }
-        public string ProductID { get; set; }
+        public int CartID { get; set; }
+        public int ProductID { get; set; }
         public int Qty { get; set; }
+        public Cart Cart { get; set; }
         public Product Product { get; set; }
     }
 }

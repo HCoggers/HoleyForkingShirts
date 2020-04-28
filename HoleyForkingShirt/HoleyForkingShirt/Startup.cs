@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using HoleyForkingShirt.Models.Services;
+using HoleyForkingShirt.Models.Interfaces;
 
 namespace HoleyForkingShirt
 {
@@ -36,7 +37,7 @@ namespace HoleyForkingShirt
 
             services.AddDbContext<ApplicationDBContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ProductionUserConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultUserConnection"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -45,10 +46,11 @@ namespace HoleyForkingShirt
 
             services.AddDbContext<StoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ProductionStoreConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultStoreConnection"));
             });
 
             services.AddTransient<IInventory, InventoryService>();
+            services.AddTransient<ICartManager, CartService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

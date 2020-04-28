@@ -1,11 +1,14 @@
 ﻿@page "{id:int?}"
 @model HoleyForkingShirt.Pages.Products.DetailsModel
-@{
-}
+@using Microsoft.AspNetCore.Identity
+@using HoleyForkingShirt.Models
 @{
     ViewData["Title"] = $"{Model.Product.Name}";
     Layout = "_Layout";
 }
+
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 <!DOCTYPE html>
 <html>
@@ -18,5 +21,12 @@
     <p>@Model.Product.Description</p>
     <p>@Model.Product.Size</p>
     <p>@Model.Product.Price</p>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <form method="post">
+            <input hidden name="inputId" value="@Model.Product.ID" />
+            <button action="submit">Add To Cart</button>
+        </form>
+    }
 </body>
 </html>

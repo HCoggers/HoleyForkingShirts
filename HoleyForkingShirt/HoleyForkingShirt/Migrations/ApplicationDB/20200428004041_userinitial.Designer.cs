@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HoleyForkingShirt.Migrations
+namespace HoleyForkingShirt.Migrations.ApplicationDB
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20200421222800_intital")]
-    partial class intital
+    [Migration("20200428004041_userinitial")]
+    partial class userinitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

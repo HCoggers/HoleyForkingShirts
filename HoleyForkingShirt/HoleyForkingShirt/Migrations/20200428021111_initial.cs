@@ -1,11 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HoleyForkingShirt.Migrations.StoreDb
+namespace HoleyForkingShirt.Migrations
 {
-    public partial class StoreInitial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
@@ -24,6 +37,31 @@ namespace HoleyForkingShirt.Migrations.StoreDb
                     table.PrimaryKey("PK_Products", x => x.ID);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    CartID = table.Column<int>(nullable: false),
+                    ProductID = table.Column<int>(nullable: false),
+                    Qty = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => new { x.CartID, x.ProductID });
+                    table.ForeignKey(
+                        name: "FK_CartItems_Carts_CartID",
+                        column: x => x.CartID,
+                        principalTable: "Carts",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "Description", "Image", "Name", "Price", "Size", "Sku" },
@@ -40,10 +78,21 @@ namespace HoleyForkingShirt.Migrations.StoreDb
                     { 9, "The tag says XS, but we both know that's no longer true.", "https://imgur.com/GOTgNnd.jpg", "A verrrrry Stretched Black Sweater", 9.50m, 3, "1800stretch1800" },
                     { 10, "This one might actually be intentional. This shirt looks perfect for a budding (starving) musician.", "https://imgur.com/XNFTeA1.jpg", "Slashed Rocker Tee", 15.00m, 1, "86ROCK86" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_ProductID",
+                table: "CartItems",
+                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CartItems");
+
+            migrationBuilder.DropTable(
+                name: "Carts");
+
             migrationBuilder.DropTable(
                 name: "Products");
         }
