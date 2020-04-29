@@ -4,9 +4,23 @@
 @using HoleyForkingShirt.Models
 @inject UserManager<ApplicationUser> UserManager
 
-    <h3>@User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value.Split(' ')[0]'s Cart</h3>
-@foreach (var item in Model)
-{
-    <p>@item.Product.Name</p>
-    <p>@item.Qty</p>
-}
+
+<div class="cart">
+    <label for="minimize" class="subtitle">
+        <h3>
+            @User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value.Split(' ')[0]'s Cart
+        </h3>
+    </label>
+    <input type="checkbox" id="minimize" />
+    <div class="toggle">
+        <ul class="items">
+            @foreach (var item in Model)
+            {
+            <li>
+                <p>@item.Product.Name (<span id="Qty">@item.Qty</span>)</p>
+            </li>
+            }
+        </ul>
+        <a asp-page="/Cart/Cart">View Cart + Checkout</a>
+    </div>
+</div>

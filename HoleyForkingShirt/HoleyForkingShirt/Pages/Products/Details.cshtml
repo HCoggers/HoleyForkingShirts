@@ -10,23 +10,19 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    <h2>@Model.Product.Name</h2>
-    <img src="@Model.Product.Image" />
-    <p>@Model.Product.Description</p>
-    <p>@Model.Product.Size</p>
-    <p>@Model.Product.Price</p>
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <form method="post">
-            <input hidden name="inputId" value="@Model.Product.ID" />
-            <button action="submit">Add To Cart</button>
-        </form>
-    }
-</body>
-</html>
+    <main class="details">
+        <img class="productimage" src="@Model.Product.Image" />
+        <h2 class="subtitle">@Model.Product.Name</h2>
+        <p>@Model.Product.Description</p>
+        <p>Size: @Model.Product.Size</p>
+        <p>$@Model.Product.Price</p>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <form method="post">
+                <input hidden name="inputId" value="@Model.Product.ID" />
+                <button action="submit">Add To Cart</button>
+            </form>
+            @await Component.InvokeAsync("MiniCart")
+        }
+
+    </main>

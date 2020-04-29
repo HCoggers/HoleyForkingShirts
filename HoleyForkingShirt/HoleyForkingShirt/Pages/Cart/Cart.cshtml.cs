@@ -15,14 +15,18 @@ namespace HoleyForkingShirt.Pages.Cart
     public class CartModel : PageModel
     {
         private ICartManager _cartManager; 
-        public List<CartItems> InCart;
         private SignInManager<ApplicationUser> _signInManager;
         private UserManager<ApplicationUser> _userManager;
+
+        public List<CartItems> InCart;
+        public decimal Total;
+
         public CartModel(ICartManager cartManager, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _cartManager = cartManager;
             _signInManager = signInManager;
             _userManager = userManager;
+            Total = 0;
         }
         public async Task<IActionResult> OnGetAsync()
         {
@@ -36,6 +40,11 @@ namespace HoleyForkingShirt.Pages.Cart
                 {
                     ModelState.AddModelError("", "You have no items in your cart.");
                     return RedirectToPage("/Products/Shop");
+                }
+
+                foreach (var item in items)
+                {
+                    Total += (item.Product.Price * item.Qty);
                 }
 
                 InCart = items;

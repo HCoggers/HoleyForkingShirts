@@ -1,29 +1,27 @@
 ﻿@page
 @model HoleyForkingShirt.Pages.Cart.CartModel
 @{
+    ViewData["Title"] = "Cart";
+    Layout = "_Layout";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
 
-<body>
-    <p>Cart</p>
+    <main class="checkout">
+        <h2 class="subtitle">Cart</h2>
 
-    <div class="container">
-        <div class="row">
-            @foreach (var item in Model.InCart)
-            {
-                <div class="col-4 product">
-                    @item.Product.Name (@item.Qty)
-
-                    <a asp-page="/Products/Details" asp-route-id="@item.Product.ID"><img src="@item.Product.Image" class="img-fluid" /></a>
-
-                </div>
-            }
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model.InCart)
+                {
+                    <div class="col-4 product">
+                        <a asp-page="/Products/Details" asp-route-id="@item.Product.ID">
+                            <p>@item.Product.Name (@item.Qty)</p>
+                            <p>@item.Product.Price</p>
+                        </a>
+                    </div>
+                }
+            </div>
         </div>
-
-    </div>
-</body>
-</html>
+        <p>Total: $@Model.Total</p>
+        <br />
+        <button action="post">Check Out</button>
+    </main>

@@ -9,14 +9,14 @@ nav > form {
     text-align: right;
     padding: 0;
 }
-    nav>form>button {
+    nav>form>button, nav.navbar-dark>a.navbar-text {
         padding: .5em 1em;
         background-color: transparent;
         border: none;
         color:aquamarine;
     }
 
-        nav > form > button:hover {
+        nav > form > button:hover, nav>a.navbar-text:hover {
             transition-duration: 0.5s;
             color: #343a40;
             background-color: aquamarine;
@@ -25,6 +25,11 @@ nav > form {
 h2, h1 {
     font-family: 'Montserrat', sans-serif;
 }
+
+    h2.subtitle {
+        text-align: center;
+        font-size: 7vh;
+    }
 
 a, a:hover {
     text-decoration: none;
@@ -122,7 +127,7 @@ main {
 }
 
 .img-fluid {
-    height: 20vw;
+    height: 30vh;
     width: 100%;
     object-fit: cover;
 }
@@ -131,6 +136,104 @@ footer {
     background-color: aliceblue;
     text-align: center;
     color: #343a40;
+}
+
+.cart {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 20vw;
+    z-index: 1;
+    background-color: hsl(200, 100%, 10%);
+    color: antiquewhite;
+    padding: 1em 1em;
+}
+
+.cart label:hover {
+    cursor: pointer;
+}
+
+.toggle {
+    transition: max-height 1.5s;
+    background-color: aliceblue;
+    color: #343a40;
+    max-height: 0;
+}
+    .toggle a {
+        background-color: hsl(200, 100%, 10%);
+        padding: 1em;
+        display:block;
+        position: sticky;
+        bottom: 0;
+        text-align:center;
+        color: antiquewhite;
+    }
+        .toggle a:hover {
+            font-style: oblique;
+            background-color: hsl(200, 100%, 20%);
+        }
+
+        .toggle {
+            overflow: auto;
+        }
+#minimize:checked + .toggle {
+    max-height: 40vh;
+}
+#minimize {
+    display: none;
+}
+#Qty {
+    font-style:oblique;
+}
+
+.product {
+    background-color: hsl(200, 100%, 5%);
+    font-size: 2vh;
+    padding: 1em 1em 3em;
+    display: grid;
+    grid-template-rows: 25% 15% auto;
+    min-width: 30%;
+}
+
+    .product a {
+        color: aliceblue;
+    }
+
+.product p:first-child {
+    word-break: normal;
+    font-size: 3vh;
+}
+    .product img {
+        border-radius: 5%;
+        border: hsl(200, 100%, 15%) 3px solid;
+    }
+
+.details, .checkout {
+    padding: 2em;
+}
+
+    .checkout p:last-of-type {
+        margin: 1em  0;
+        padding: .5em;
+        background-color: aliceblue;
+        color: #343a40;
+    }
+    .checkout button {
+        margin-left: auto;
+        padding: 1em;
+        background-color: hsl(200, 100%, 5%);
+        color: antiquewhite;
+        border: none;
+    }
+        .checkout button:hover {
+            background-color: hsl(200, 100%, 15%);
+        }
+
+.productimage {
+    border-radius: 5%;
+    border: hsl(200, 100%, 15%) 3px solid;
+    margin: 0 auto;
+    width: 50%;
 }
 
 @media only screen and (max-width: 900px) {
