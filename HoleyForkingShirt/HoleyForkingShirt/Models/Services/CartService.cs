@@ -11,17 +11,30 @@ namespace HoleyForkingShirt.Models.Services
     public class CartService : ICartManager
     {
         private readonly StoreDbContext _context;
+        /// <summary>
+        /// Constructor for carts
+        /// </summary>
+        /// <param name="storeDbContext"></param>
         public CartService(StoreDbContext storeDbContext)
         {
             _context = storeDbContext;
         }
+        /// <summary>
+        /// Creates carts for the databse
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
         public async Task<Cart> CreateCart(Cart cart)
         {
             _context.Add(cart);
             await _context.SaveChangesAsync();
             return cart;
         }
-
+        /// <summary>
+        /// Deletes carts in the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task DeleteCart(int id)
         {
             var toDelete = await _context.Carts.FindAsync(id);
@@ -29,7 +42,11 @@ namespace HoleyForkingShirt.Models.Services
 
             await _context.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// Grabs the reference to a cart based on userid 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<Cart> GetCart(string userId)
         {
             var carts = await _context.Carts.Where(c => c.UserId == userId)
@@ -38,7 +55,11 @@ namespace HoleyForkingShirt.Models.Services
 
             return carts.First();
         }
-
+        /// <summary>
+        /// grabs all items in a cart based on cartid
+        /// </summary>
+        /// <param name="cartId"></param>
+        /// <returns></returns>
         public async Task<List<CartItems>> GetAllItems(int cartId)
         {
             var items = await _context.CartItems.Where(i => i.CartID == cartId)
@@ -46,7 +67,12 @@ namespace HoleyForkingShirt.Models.Services
                 .ToListAsync();
             return items;
         }
-
+        /// <summary>
+        /// Updates the cart in the database.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cart"></param>
+        /// <returns></returns>
         public async Task UpdateCart(int id, Cart cart)
         {
             _context.Carts.Update(cart);

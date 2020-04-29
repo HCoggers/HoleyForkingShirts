@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace HoleyForkingShirt.Models
 {
+    /// <summary>
+    /// Scaffold for a basic cart
+    /// </summary>
     public class Cart
     {
         public int ID { get; set; }

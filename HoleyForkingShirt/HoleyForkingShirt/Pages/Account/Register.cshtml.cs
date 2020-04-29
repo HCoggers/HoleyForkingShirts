@@ -31,7 +31,10 @@ namespace HoleyForkingShirt.Pages.Account
         public void OnGet()
         {
         }
-
+        /// <summary>
+        /// This is our post method for register. It makes a user and makes the claims for the user. 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
@@ -81,7 +84,9 @@ namespace HoleyForkingShirt.Pages.Account
 
             return Page();
         }
-
+        /// <summary>
+        /// This is what is required to register on our page as a user. 
+        /// </summary>
         public class RegisterInput
         {
             [Required]
