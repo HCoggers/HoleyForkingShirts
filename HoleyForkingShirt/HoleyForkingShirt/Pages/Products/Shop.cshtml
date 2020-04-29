@@ -1,35 +1,37 @@
 ﻿@page
 @model HoleyForkingShirt.Pages.Products.ShopModel
+@using Microsoft.AspNetCore.Identity
+@using HoleyForkingShirt.Models
+@using System.Security.Claims
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Shop";
 }
+@inject SignInManager<ApplicationUser> SignInManager
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-
-<body>
+<main>
     <div asp-validation-summary="All"></div>
-    <p>Shop</p>
+    <h2 class="subtitle">Shop</h2>
 
-    @await Component.InvokeAsync("MiniCart");
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("MiniCart")
+    }
+        <div class="container">
 
-    <div class="container">
+            <div class="row">
+                @foreach (var product in Model.Inventory)
+                {
+                    <div class="col-4 product">
+                        <a asp-page="/Products/Details" asp-route-id="@product.ID">
+                            <img src="@product.Image" class="img-fluid" />
+                            <p>@product.Name</p>
+                            <p>($@product.Price)</p>
+                        </a>
+                    </div>
+                }
+            </div>
 
-        <div class="row">
-            @foreach (var product in Model.Inventory)
-            {
-                <div class="col-4 product">
-                    @product.Name
-
-                    <a asp-page="/Products/Details" asp-route-id="@product.ID"><img src="@product.Image" class="img-fluid" /></a>
-                </div>
-            }
         </div>
+    </main>
 
-    </div>
-</body>
-</html>
