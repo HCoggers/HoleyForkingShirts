@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using HoleyForkingShirt.Models;
 using HoleyForkingShirt.Models.Interfaces;
@@ -17,15 +18,17 @@ namespace HoleyForkingShirt.Pages.Account
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private ICartManager _cartManager;
+        private IEmailSender _emailSender;
 
         [BindProperty]
         public RegisterInput RegisterData { get; set; }
 
-        public RegisterModel(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signIn, ICartManager cartManager)
+        public RegisterModel(UserManager<ApplicationUser> usermanager, SignInManager<ApplicationUser> signIn, ICartManager cartManager, IEmailSender emailSender)
         {
             _userManager = usermanager;
             _signInManager = signIn;
             _cartManager = cartManager;
+            _emailSender = emailSender;
         }
 
         public void OnGet()
@@ -52,7 +55,7 @@ namespace HoleyForkingShirt.Pages.Account
 
                 if (result.Succeeded)
                 {
-
+                    // COLLECT CLAIMS
                     Claim fullName = new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LatName}", ClaimValueTypes.String);
                     Claim birthday = new Claim(
                         ClaimTypes.DateOfBirth, 
@@ -65,7 +68,15 @@ namespace HoleyForkingShirt.Pages.Account
                     await _userManager.AddClaimsAsync(user, claims);
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
+                    // SEND REGISTRATION EMAIL
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine($"<h1>Welcome to Holey Forking Shirts, {user.FirstName}!</h1>");
+                    sb.AppendLine("<h2>You're account was registered successfully</h2>");
+                    sb.AppendLine("<p>To start your E-thrifting adventure, click <a href='https://holeyforkingshirts.azurewebsites.net'>HERE</a>");
 
+                    await _emailSender.SendEmailAsync(user.Email, "Welcome", sb.ToString());
+
+                    // CREATE PERSONAL SHOPPING CART
                     Models.Cart cart = new Models.Cart
                     {
                         UserId = user.Id,
@@ -73,7 +84,7 @@ namespace HoleyForkingShirt.Pages.Account
                     };
                     await _cartManager.CreateCart(cart);
 
-                     return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 foreach(var error in result.Errors)

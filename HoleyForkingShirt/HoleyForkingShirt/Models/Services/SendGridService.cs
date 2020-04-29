@@ -29,7 +29,6 @@ namespace HoleyForkingShirt.Models.Services
             msg.AddContent(MimeType.Html, htmlMessage);
 
             await client.SendEmailAsync(msg);
-            throw new NotImplementedException();
         }
 
 
