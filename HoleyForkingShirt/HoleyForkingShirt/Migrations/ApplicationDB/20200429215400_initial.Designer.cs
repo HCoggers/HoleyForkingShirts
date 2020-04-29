@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoleyForkingShirt.Migrations.ApplicationDB
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20200428004041_userinitial")]
-    partial class userinitial
+    [Migration("20200429215400_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

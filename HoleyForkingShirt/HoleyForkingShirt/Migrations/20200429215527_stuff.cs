@@ -2,7 +2,7 @@
 
 namespace HoleyForkingShirt.Migrations
 {
-    public partial class initial : Migration
+    public partial class stuff : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
