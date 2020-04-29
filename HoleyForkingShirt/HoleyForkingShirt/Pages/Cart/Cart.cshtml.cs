@@ -57,5 +57,10 @@ namespace HoleyForkingShirt.Pages.Cart
             }
 
         }
+
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("/Checkout/Receipt");
+        }
     }
 }
