@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoleyForkingShirt.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200428021111_initial")]
-    partial class initial
+    [Migration("20200429215527_stuff")]
+    partial class stuff
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
