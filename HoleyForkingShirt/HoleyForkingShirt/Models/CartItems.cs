@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace HoleyForkingShirt.Models
 {
+    /// <summary>
+/// Scaffold for cartitems
+/// </summary>
     public class CartItems
     {
         public int CartID { get; set; }
