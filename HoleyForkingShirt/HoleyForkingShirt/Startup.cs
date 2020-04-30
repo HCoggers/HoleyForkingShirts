@@ -37,7 +37,7 @@ namespace HoleyForkingShirt
 
             services.AddDbContext<ApplicationDBContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ProductionUserConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultUserConnection"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -46,7 +46,7 @@ namespace HoleyForkingShirt
 
             services.AddDbContext<StoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ProductionStoreConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultStoreConnection"));
             });
 
             services.AddTransient<IInventory, InventoryService>();
@@ -55,7 +55,7 @@ namespace HoleyForkingShirt
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -65,6 +65,9 @@ namespace HoleyForkingShirt
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
+
+            RoleInitializer.SeedData(serviceProvider);
 
             app.UseStaticFiles();
 

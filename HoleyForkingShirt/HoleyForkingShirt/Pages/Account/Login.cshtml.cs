@@ -13,12 +13,14 @@ namespace HoleyForkingShirt.Pages.Account
     public class LoginModel : PageModel
     {
         private SignInManager<ApplicationUser> _signInManager;
+        private UserManager<ApplicationUser> _userManager;
 
         [BindProperty]
         public LoginViewModel Input { get; set; }
-        public LoginModel(SignInManager<ApplicationUser> signInManager)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
         public void OnGet()
         {
@@ -31,7 +33,27 @@ namespace HoleyForkingShirt.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, isPersistent:false, false);
                 if(result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    var user = _userManager.Users.Where(u => u.Email == Input.Email).FirstOrDefault();
+                    if (!await _userManager.IsInRoleAsync(user, ApplicationRoles.Member))
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                        if(!await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                        {
+                            switch (user.Email)
+                            {
+                                case "harry.cogswell@gmail.com":
+                                case "splintercel3000@gmail.com":
+                                case "amanda@codefellows.com":
+                                case "rice.jonathanm@gmail.com":
+                                case "revyolution1120@gmail.com":
+                                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                                    break;
+                                default:
+                                    return RedirectToAction("Index", "Home");
+                            }
+                        }
+                        return RedirectToPage("/Admin/Dashboard");
+                    }
                 }
                 else
                 {
