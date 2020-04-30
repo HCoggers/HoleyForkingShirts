@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using HoleyForkingShirt.Data;
 using HoleyForkingShirt.Models;
 using HoleyForkingShirt.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,6 +15,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace HoleyForkingShirt.Pages.Cart
 {
+    [Authorize]
     public class CartModel : PageModel
     {
         private ICartManager _cartManager; 
