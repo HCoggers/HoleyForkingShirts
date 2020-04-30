@@ -49,6 +49,11 @@ namespace HoleyForkingShirt
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultStoreConnection"));
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+            });
+
             services.AddTransient<IInventory, InventoryService>();
             services.AddTransient<ICartManager, CartService>();
             services.AddTransient<IEmailSender, SendGridService>();
