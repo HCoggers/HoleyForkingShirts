@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HoleyForkingShirt.Migrations
+namespace HoleyForkingShirt.Migrations.StoreDb
 {
-    public partial class stuff : Migration
+    public partial class ye : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

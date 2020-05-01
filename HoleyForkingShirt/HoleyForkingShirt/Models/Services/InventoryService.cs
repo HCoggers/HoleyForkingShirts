@@ -67,10 +67,9 @@ namespace HoleyForkingShirt.Models.Services
         /// <summary>
         /// Update the properties of a product of a given ID
         /// </summary>
-        /// <param name="id">ID of product to be altered</param>
         /// <param name="product">Altered version of original property</param>
         /// <returns>No Content</returns>
-        public async Task UpdateProduct(int id, Product product)
+        public async Task UpdateProduct(Product product)
         {
             _context.Products.Update(product);
             await _context.SaveChangesAsync();

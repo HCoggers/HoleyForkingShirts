@@ -1,0 +1,42 @@
+﻿@model IEnumerable<HoleyForkingShirt.Models.Product>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Products Manager";
+}
+
+<main>
+    <h2 class="subtitle">Manage Products</h2>
+
+    <div class="container">
+
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-4 product">
+                    <a asp-action="Details" asp-controller="Inventory" asp-route-id="@product.ID">
+                        <img src="@product.Image" class="img-fluid" />
+                        <p>@product.Name</p>
+                        <p>($@product.Price)</p>
+                    </a>
+                </div>
+            }
+        </div>
+        <form asp-action="CreateProduct">
+            <input type="text" name="name" />
+            <textarea type="text" name="description"></textarea>
+            <select name="size">
+                <option value="0">XS</option>
+                <option value="1">S</option>
+                <option value="2">M</option>
+                <option value="3">L</option>
+                <option value="4">XL</option>
+                <option value="5">XXL</option>
+            </select>
+            <input type="number" name="price" step="any" min="0.01" />
+            <input type="text" name="image" />
+            <input type="text" name="sku" />
+            <button type="submit">Create</button>
+        </form>
+        <a asp-page="/Admin/Dashboard">Return To Dashboard</a>
+    </div>
+</main>
