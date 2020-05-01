@@ -4,16 +4,14 @@ using HoleyForkingShirt.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HoleyForkingShirt.Migrations.ApplicationDB
+namespace HoleyForkingShirt.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20200430205731_userinitial")]
-    partial class userinitial
+    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

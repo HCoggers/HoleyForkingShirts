@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model HoleyForkingShirt.Models.Product
+
+    <main class="details">
+        <img class="productimage" src="@Model.Image" />
+        <h2 class="subtitle">@Model.Name</h2>
+        <p>#@Model.Sku</p>
+        <p>@Model.Description</p>
+        <p>Size: @Model.Size</p>
+        <p>$@Model.Price</p>
+
+        <form asp-action="UpdateProduct">
+            <input type="text" name="name" placeholder="@Model.Name"/>
+            <textarea type="text" name="description" placeholder="@Model.Description"></textarea>
+            <select name="size">
+                <option value="0">XS</option>
+                <option value="1">S</option>
+                <option value="2">M</option>
+                <option value="3">L</option>
+                <option value="4">XL</option>
+                <option value="5">XXL</option>
+            </select>
+            <input type="number" name="price" step="any" min="0.01" />
+            <input type="hidden" name="sku" value="@Model.Sku" />
+            <input type="hidden" name="id" value="@Model.ID" />
+            <input type="hidden" name="image" value="@Model.Image" />
+            <button type="submit">Update</button>
+        </form>
+        <form asp-action="DeleteProduct">
+            <input type="hidden" name="id" value="@Model.ID" />
+            <button type="submit">Delete</button>
+        </form>
+    </main>
