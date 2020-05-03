@@ -10,6 +10,44 @@
     <div class="container">
 
         <div class="row">
+
+            <div class="col-4 product newproduct">
+                <p class="subtitle">NEW</p>
+                <form class="overlay" asp-action="CreateProduct">
+                    <label>
+                        Product:
+                        <input required type="text" name="name" />
+                    </label>
+                    <label>
+                        Description:
+                        <textarea required type="text" name="description"></textarea>
+                    </label>
+                    <label>
+                        Size:
+                        <select required name="size">
+                            <option value="0">XS</option>
+                            <option value="1">S</option>
+                            <option value="2">M</option>
+                            <option value="3">L</option>
+                            <option value="4">XL</option>
+                            <option value="5">XXL</option>
+                        </select>
+                    </label>
+                    <label>
+                        Price:
+                        <input required type="number" name="price" step="any" min="0.01" />
+                    </label>
+                    <label>
+                        Image (URL):
+                        <input required type="text" name="image" />
+                    </label>
+                    <label>
+                        SKU #:
+                        <input required type="text" name="sku" />
+                    </label>
+                    <button type="submit">Create</button>
+                </form>
+            </div>
             @foreach (var product in Model)
             {
                 <div class="col-4 product">
@@ -21,22 +59,6 @@
                 </div>
             }
         </div>
-        <form asp-action="CreateProduct">
-            <input type="text" name="name" />
-            <textarea type="text" name="description"></textarea>
-            <select name="size">
-                <option value="0">XS</option>
-                <option value="1">S</option>
-                <option value="2">M</option>
-                <option value="3">L</option>
-                <option value="4">XL</option>
-                <option value="5">XXL</option>
-            </select>
-            <input type="number" name="price" step="any" min="0.01" />
-            <input type="text" name="image" />
-            <input type="text" name="sku" />
-            <button type="submit">Create</button>
-        </form>
         <a asp-page="/Admin/Dashboard">Return To Dashboard</a>
     </div>
 </main>

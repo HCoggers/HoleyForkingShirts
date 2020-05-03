@@ -4,13 +4,20 @@
       Layout = "_Layout";
     ViewData["Title"] = "Admin Page";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Page</title>
-</head>
-<body>
-    <h1>Hello Admins and welcome to your Admin Page!</h1>
-    <a asp-action="Index" asp-controller="Inventory">Manage Products Here!</a>
-</body>
-</html>
+
+<main class="admin">
+    <div class="row" id="title">
+        <h1><span class="subtitle">Welcome to the</span><br />Admin Dashboard</h1>
+    </div>
+    <div class="row">
+        <a class="col-6" id="shop" asp-action="Index" asp-controller="Inventory">
+            <div>
+                <p>Manage Inventory</p>
+            </div>
+        </a>
+        <a class="col-6" id="featured" asp-action="Index" asp-controller="Home">
+            <h3 class="subtitle">Home</h3>
+            <p>return to the <br /> HFS <br />landing page</p>
+        </a>
+    </div>
+</main>

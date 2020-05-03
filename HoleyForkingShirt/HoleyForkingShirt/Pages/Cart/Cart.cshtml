@@ -8,20 +8,36 @@
     <main class="checkout">
         <h2 class="subtitle">Cart</h2>
 
-        <div class="container">
-            <div class="row">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
                 @foreach (var item in Model.InCart)
                 {
-                    <div class="col-4 product">
-                        <a asp-page="/Products/Details" asp-route-id="@item.Product.ID">
-                            <p>@item.Product.Name (@item.Qty)</p>
-                            <p>@item.Product.Price</p>
-                        </a>
-                    </div>
+                    <tr>
+                        <td>
+                            <a asp-page="/Products/Details" asp-route-id="@item.Product.ID">
+                                @item.Product.Name
+                            </a>
+                        </td>
+                        <td>(@item.Qty)</td>
+                        <td>$@item.Product.Price</td>
+                    </tr>
                 }
-            </div>
-        </div>
-        <p>Total: $@Model.Total</p>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total: </td>
+                    <td></td>
+                    <td>$@Model.Total</td>
+                </tr>
+            </tfoot>
+        </table>
         <br />
         <form method="post">
             <button type="submit">Check Out</button>

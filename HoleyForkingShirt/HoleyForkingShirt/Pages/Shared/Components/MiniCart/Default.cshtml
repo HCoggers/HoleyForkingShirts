@@ -14,12 +14,21 @@
     <input type="checkbox" id="minimize" />
     <div class="toggle">
         <ul class="items">
-            @foreach (var item in Model)
+            @if (Model.Any())
             {
-            <li>
-                <p>@item.Product.Name (<span id="Qty">@item.Qty</span>)</p>
-            </li>
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <p>@item.Product.Name (<span id="Qty">@item.Qty</span>)</p>
+                        <p>@(item.Product.Price * item.Qty)</p>
+                    </li>
+                }
             }
+            else
+            {
+              <p>Your Cart is Empty.</p>
+            }
+
         </ul>
         <a asp-page="/Cart/Cart">View Cart + Checkout</a>
     </div>

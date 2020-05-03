@@ -48,6 +48,11 @@ main {
     font-family: 'Montserrat', sans-serif;
     display: grid;
 }
+
+    main > * {
+        text-align: center;
+    }
+
 .row {
     width: 100%;
     margin: 0;
@@ -97,7 +102,7 @@ main {
     display: none;
 }
 
-#shop {
+#shop { 
     padding: 0;
     color: antiquewhite;
     font-size: 500%;
@@ -147,6 +152,7 @@ footer {
     background-color: hsl(200, 100%, 10%);
     color: antiquewhite;
     padding: 1em 1em;
+    border-radius: 20px 20px 0 0;
 }
 
 .cart label:hover {
@@ -158,6 +164,7 @@ footer {
     background-color: aliceblue;
     color: #343a40;
     max-height: 0;
+    overflow: auto;
 }
     .toggle a {
         background-color: hsl(200, 100%, 10%);
@@ -172,10 +179,10 @@ footer {
             font-style: oblique;
             background-color: hsl(200, 100%, 20%);
         }
+.items {
+    padding: .5em;
+}
 
-        .toggle {
-            overflow: auto;
-        }
 #minimize:checked + .toggle {
     max-height: 40vh;
 }
@@ -187,25 +194,40 @@ footer {
 }
 
 .product {
-    background-color: hsl(200, 100%, 5%);
     font-size: 2vh;
-    padding: 1em 1em 3em;
-    display: grid;
-    grid-template-rows: 25% 15% auto;
     min-width: 30%;
+    margin-bottom: 20px;
 }
 
     .product a {
         color: aliceblue;
     }
 
-.product p:first-child {
-    word-break: normal;
-    font-size: 3vh;
-}
+    .product p {
+        width: 100%;
+        margin: 0;
+        padding: .5em;
+    }
+
+        .product p:first-of-type {
+            font-weight: bolder;
+            word-break: normal;
+            background-color: hsl(200, 100%, 10%);
+            font-size: 2.5vh;
+        }
+
+        .product p:last-child {
+            border-radius: 0 0 20px 20px;
+            background-color: aliceblue;
+            color: hsla(200, 100%, 10%, .5);
+        }
+
     .product img {
-        border-radius: 5%;
-        border: hsl(200, 100%, 15%) 3px solid;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .product a img:hover {
+        filter: greyscale(100%);
     }
 
 .details, .checkout {
@@ -231,9 +253,65 @@ footer {
 
 .productimage {
     border-radius: 5%;
-    border: hsl(200, 100%, 15%) 3px solid;
     margin: 0 auto;
     width: 50%;
+}
+
+th {
+    background-color: hsl(200, 100%, 10%);
+    padding: .5em 1em .2em;
+}
+
+td {
+    background-color: aliceblue;
+    padding: .2em 1em;
+    color: hsla(200, 100%, 10%, .5);
+}
+
+tfoot {
+    border-top: solid 1px hsl(200, 100%, 10%);
+}
+
+table a {
+    color: hsl(200, 100%, 10%);
+}
+table a:hover {
+    color: aquamarine;
+}
+
+.admin {
+    min-height: 70vh;
+}
+
+.newproduct {
+    background-color: hsl(200, 100%, 10%);
+    color: aquamarine;
+    cursor: pointer;
+    padding: 2em;
+    font-size: 1.5vh;
+    text-align: left;
+    display: block;
+    border-radius: 20px;
+    margin: auto;
+}
+
+.newproduct .subtitle {
+    font-size:3vh;
+}
+
+.newproduct input, .newproduct label, .newproduct select, .newproduct textarea {
+    display: block;
+    width: 100%;
+}
+
+.newproduct button {
+    width:100%;
+    background-color:aquamarine;
+    color: hsl(200, 100%, 10%);
+    font-size: 2em;
+    border: none;
+    border-radius: 10px;
+    margin: auto;
 }
 
 @media only screen and (max-width: 900px) {

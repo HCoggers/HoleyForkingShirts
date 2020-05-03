@@ -49,11 +49,13 @@ namespace HoleyForkingShirt.Pages.Account
                                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
                                     break;
                                 default:
-                                    return RedirectToAction("Index", "Home");
+                                    break;
                             }
                         }
-                        return RedirectToPage("/Admin/Dashboard");
                     }
+                    if (!await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                        return RedirectToPage("/Admin/Dashboard");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
