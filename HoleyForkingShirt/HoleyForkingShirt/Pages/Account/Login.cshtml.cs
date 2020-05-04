@@ -25,7 +25,10 @@ namespace HoleyForkingShirt.Pages.Account
         public void OnGet()
         {
         }
-
+        /// <summary>
+        /// This is what we use to set the admin roles to specific user emails. 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPost()
         {
             if(ModelState.IsValid)
