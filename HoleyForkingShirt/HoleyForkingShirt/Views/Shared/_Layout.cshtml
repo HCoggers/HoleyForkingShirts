@@ -15,7 +15,7 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" asp-page="/">
+        <a class="navbar-brand" asp-action="Index" asp-controller="Home">
             <h2>HFShirts <span class="subtitle">Every shirt deserves a second chance</span></h2>
         </a>
         @if (User.IsInRole("Admin"))
