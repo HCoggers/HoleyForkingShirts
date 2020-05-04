@@ -57,6 +57,7 @@ namespace HoleyForkingShirt
             services.AddTransient<IInventory, InventoryService>();
             services.AddTransient<ICartManager, CartService>();
             services.AddTransient<IEmailSender, SendGridService>();
+            services.AddTransient<IPayment, PaymentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

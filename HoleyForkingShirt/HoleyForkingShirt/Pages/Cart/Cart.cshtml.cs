@@ -22,16 +22,18 @@ namespace HoleyForkingShirt.Pages.Cart
         private SignInManager<ApplicationUser> _signInManager;
         private UserManager<ApplicationUser> _userManager;
         private IEmailSender _emailSender;
+        private IPayment _payment;
 
         public List<CartItems> InCart;
         public decimal Total;
 
-        public CartModel(ICartManager cartManager, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public CartModel(ICartManager cartManager, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender, IPayment payment)
         {
             _cartManager = cartManager;
             _signInManager = signInManager;
             _userManager = userManager;
             _emailSender = emailSender;
+            _payment = payment;
             Total = 0;
         }
         /// <summary>
@@ -91,5 +93,8 @@ namespace HoleyForkingShirt.Pages.Cart
             await _emailSender.SendEmailAsync(User.Claims.First(c => c.Type == ClaimTypes.Email).Value, "Here is your receipt.", sb.ToString());
             return RedirectToPage("/Checkout/Receipt");
         }
+
+        
+    
     }
 }

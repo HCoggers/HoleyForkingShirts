@@ -1,6 +1,6 @@
 # Holey Forking Shirts - Online Thrift Shop
 *by **Brandon Johnson** and **Harry Cogswell***  
-*updated 4/26/2020*
+*updated 5/3/2020*
 
 ---
 
@@ -36,8 +36,8 @@ Microsoft Visual Studio Community 2017 (Version 15.5.7)
 
 ## Recent Updates
 
-#### V 1.0
-*Site is pushed to production (no Transactions implemented)* - 26 May 2020
+#### V 1.1
+*Site features personalized shopping Cart and Administrative Tools* - 3 May 2020
 
 ---
 
@@ -48,15 +48,17 @@ When you register for an account on Holey Forking Shirts, we will collect some o
 Don't worry, HoleyFork LLC will not redistribute your personal information to anyone outside of our website.
 
 ```
-Full Name: "Jerry Exampleson
+Full Name: "Jerry Exampleson"
 E-mail: Jerry@Example.com
 Birthday: "November 5, 1955"
 ```
 We want your full name so that we can give you a personalized greeting every time you log into our site!  
 
-We need your email so that we can easily send you news about special events happening at HFShirts! You will also use it to log into your account.  
+We need your email so that we can easily send you a itemized receipt for your purchases, 
+and any news about special events happening at HFShirts! You will also use it to log into your account.  
 
-We will be using your birthday in the future not only to protect our younger users from buying age-inappropriate attire, but also so that we can send you a complimentary $2 gift card for your birthday, just for signing up!  
+We will be using your birthday in the future not only to protect our younger users from buying age-inappropriate 
+attire, but also so that we can send you a complimentary $2 gift card for your birthday, just for signing up!  
 
 ---
 
@@ -77,9 +79,8 @@ We will be using your birthday in the future not only to protect our younger use
 ---
 
 ## Change Log
-- **1.1** | (Upcoming) *Site to feature actual transactions*
-- **1.0** | *Site is pushed to production (no Transactions implemented)*  
-26 May 2020
+- **1.1** | *Site features personalized shopping Cart and Administrative Tools* - 3 May 2020
+- **1.0** | *Site is pushed to production (no Transactions implemented)*  - 26 April 2020
 
 ---
 
