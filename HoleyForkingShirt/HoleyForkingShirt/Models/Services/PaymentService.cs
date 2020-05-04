@@ -18,7 +18,7 @@ namespace HoleyForkingShirt.Models.Services
             _config = configuration;
         }
 
-        public string Run()
+        public string Run(string cardtype)
         {
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
 
@@ -29,12 +29,43 @@ namespace HoleyForkingShirt.Models.Services
                 Item = _config["AN-TransactionKey"]
             };
 
-            var creditCard = new creditCardType
+            var creditCard = new creditCardType();
+
+            switch (cardtype)
             {
-                cardNumber = "4111111111111111",
-                expirationDate = "1021",
-                cardCode = "102"
-            };
+                case "visa":
+                    creditCard = new creditCardType
+                    {
+                        cardNumber = "4007000000027",
+                        expirationDate = "1021",
+                        cardCode = "900"
+                    };
+                    break;
+                case "master":
+                    creditCard = new creditCardType
+                    {
+                        cardNumber = "5424000000000015",
+                        expirationDate = "1021",
+                        cardCode = "901"
+                    };
+                    break;
+                case "amex":
+                    creditCard = new creditCardType
+                    {
+                        cardNumber = "370000000000002",
+                        expirationDate = "1021",
+                        cardCode = "900"
+                    };
+                    break;
+                case "discover":
+                    creditCard = new creditCardType
+                    {
+                        cardNumber = "6011000000000012",
+                        expirationDate = "1021",
+                        cardCode = "900"
+                    };
+                    break;
+            }
 
             customerAddressType billingAddress = GetAddress("someUserID");
 
@@ -56,14 +87,14 @@ namespace HoleyForkingShirt.Models.Services
 
             var response = controller.GetApiResponse();
 
-            if(response != null)
+            if (response != null)
             {
-                if(response.messages.resultCode == messageTypeEnum.Ok)
+                if (response.messages.resultCode == messageTypeEnum.Ok)
                 {
-                    return "success!";
+                    return "success";
                 }
             }
-            return "fail!!";
+            return "fail";
         }
 
         public customerAddressType GetAddress(string userName)

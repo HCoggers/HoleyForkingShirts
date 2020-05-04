@@ -186,7 +186,7 @@ namespace HFShirtsTests
 
             product.Price = 46.99M;
 
-            await service.UpdateProduct(product.ID, product);
+            await service.UpdateProduct(product);
             decimal upsell = service.GetProductById(14).Result.Price;
 
             Assert.Equal(46.99M, upsell);
