@@ -18,7 +18,15 @@
         <a class="navbar-brand" asp-page="/">
             <h2>HFShirts <span class="subtitle">Every shirt deserves a second chance</span></h2>
         </a>
-        <a class="navbar-text mr-auto" asp-page="/Products/Shop">Shop</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="navbar-text" asp-page="/Products/Shop">Shop</a>
+            <a class="navbar-text mr-auto" asp-page="/Admin/Dashboard">Admins</a>
+        }
+        else
+        {
+            <a class="navbar-text mr-auto" asp-page="/Products/Shop">Shop</a>
+        }
         @if (SignInManager.IsSignedIn(User))
         {
             <span class="navbar-text ml-auto"> Welcome back, @User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value.Split(' ')[0]!</span>

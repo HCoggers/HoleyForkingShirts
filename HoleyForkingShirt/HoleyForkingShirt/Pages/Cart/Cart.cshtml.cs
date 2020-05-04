@@ -74,7 +74,7 @@ namespace HoleyForkingShirt.Pages.Cart
         /// </summary>
         /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
-        {
+        {/*
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<h1> Order Details:</h1>");
             sb.AppendLine($"<p> {User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value} </ p >");
@@ -90,11 +90,8 @@ namespace HoleyForkingShirt.Pages.Cart
                 Total += item.Product.Price;
             }
             sb.AppendLine($"</table><p> Total: ${Total} </p>");
-            await _emailSender.SendEmailAsync(User.Claims.First(c => c.Type == ClaimTypes.Email).Value, "Here is your receipt.", sb.ToString());
-            return RedirectToPage("/Checkout/Receipt");
+            await _emailSender.SendEmailAsync(User.Claims.First(c => c.Type == ClaimTypes.Email).Value, "Here is your receipt.", sb.ToString());*/
+            return RedirectToAction("Checkout");
         }
-
-        
-    
     }
 }
