@@ -5,27 +5,38 @@
 @using HoleyForkingShirt.Models
 @inject UserManager<ApplicationUser> UserManager
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Index";
 }
+    <main>
+        <h1>Order Details:</h1>
 
-<h1>Order Details:</h1>
-
-<p>@User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value</p>
-<h2>Cart:</h2>
-<table>
-    <tr>
-        <th>Product</th>
-        <th>Qty</th>
-        <th>Price</th>
-    </tr>
-    @foreach (var item in Model.InCart)
-    {
-        <tr>
-            <td>@item.Product.Name</td>
-            <td>@item.Qty</td>
-            <td>$@item.Product.Price</td>
-        </tr>
-    }
-</table>
-<p>Total: $@Model.Total</p>
-
+        <p>@User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value</p>
+        <h2>RECEIPT:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.InCart)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Qty</td>
+                        <td>$@item.Product.Price</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td>$@Model.Total</td>
+                </tr>
+            </tfoot>
+        </table>
+    </main>

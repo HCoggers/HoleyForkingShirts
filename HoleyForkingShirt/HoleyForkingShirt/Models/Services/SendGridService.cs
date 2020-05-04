@@ -23,7 +23,7 @@ namespace HoleyForkingShirt.Models.Services
             SendGridClient client = new SendGridClient(_configuration["SENDGRID_API_KEY"]);
             SendGridMessage msg = new SendGridMessage();
 
-            msg.SetFrom("admin@HSFShirts.com", "Site Admin");
+            msg.SetFrom("admin@HFShirts.com", "Site Admin");
             msg.AddTo(email);
             msg.SetSubject(subject);
             msg.AddContent(MimeType.Html, htmlMessage);

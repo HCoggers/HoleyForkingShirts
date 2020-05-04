@@ -2,36 +2,66 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = "_Layout";
 }
 @model HoleyForkingShirt.Models.Product
 
-    <main class="details">
-        <img class="productimage" src="@Model.Image" />
-        <h2 class="subtitle">@Model.Name</h2>
-        <p>#@Model.Sku</p>
-        <p>@Model.Description</p>
-        <p>Size: @Model.Size</p>
-        <p>$@Model.Price</p>
+    <main class="details container">
+        <div class="row">
+            <div class="col-6">
+                <img class="productimage" src="@Model.Image" />
+                <h2 class="subtitle">@Model.Name</h2>
+                <p>#@Model.Sku</p>
+                <p>@Model.Description</p>
+                <p>Size: @Model.Size</p>
+                <p>$@Model.Price</p>
+            </div>
 
-        <form asp-action="UpdateProduct">
-            <input type="text" name="name" placeholder="@Model.Name"/>
-            <textarea type="text" name="description" placeholder="@Model.Description"></textarea>
-            <select name="size">
-                <option value="0">XS</option>
-                <option value="1">S</option>
-                <option value="2">M</option>
-                <option value="3">L</option>
-                <option value="4">XL</option>
-                <option value="5">XXL</option>
-            </select>
-            <input type="number" name="price" step="any" min="0.01" />
-            <input type="hidden" name="sku" value="@Model.Sku" />
-            <input type="hidden" name="id" value="@Model.ID" />
-            <input type="hidden" name="image" value="@Model.Image" />
-            <button type="submit">Update</button>
-        </form>
-        <form asp-action="DeleteProduct">
-            <input type="hidden" name="id" value="@Model.ID" />
-            <button type="submit">Delete</button>
-        </form>
+            <div class="col-6 newproduct">
+                <p class="subtitle">UPDATE</p>
+                <form asp-action="UpdateProduct">
+                    <input type="hidden" name="id" value="@Model.ID" />
+                    <label>
+                        Product:
+                        <input required type="text" name="name" value="@Model.Name" />
+                    </label>
+                    <label>
+                        Description:
+                        <textarea required type="text" name="description">@Model.Description</textarea>
+                    </label>
+                    <label>
+                        Size:
+                        <select required name="size">
+                            <option value="0">XS</option>
+                            <option value="1">S</option>
+                            <option value="2">M</option>
+                            <option value="3">L</option>
+                            <option value="4">XL</option>
+                            <option value="5">XXL</option>
+                        </select>
+                    </label>
+                    <label>
+                        Price:
+                        <input required type="number" name="price" step="any" min="0.01" value="@Model.Price" />
+                    </label>
+                    <label>
+                        Image (URL):
+                        <input required type="text" name="image" value="@Model.Image" />
+                    </label>
+                    <label>
+                        SKU #:
+                        <input required type="text" name="sku" value="@Model.Sku" />
+                    </label>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-2 newproduct">
+            <form asp-action="DeleteProduct">
+                <input type="hidden" name="id" value="@Model.ID" />
+                <button type="submit">Delete</button>
+            </form>
+        </div>
     </main>
