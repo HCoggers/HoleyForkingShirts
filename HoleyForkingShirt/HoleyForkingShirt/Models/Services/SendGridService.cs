@@ -18,6 +18,13 @@ namespace HoleyForkingShirt.Models.Services
         {
             _configuration = configuration;
         }
+        /// <summary>
+        /// This is the method that sets up our email to be able to be sent. With the send grid API
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="subject"></param>
+        /// <param name="htmlMessage"></param>
+        /// <returns></returns>
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             SendGridClient client = new SendGridClient(_configuration["SENDGRID_API_KEY"]);

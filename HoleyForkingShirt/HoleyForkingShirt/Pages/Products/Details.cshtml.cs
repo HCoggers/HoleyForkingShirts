@@ -31,7 +31,11 @@ namespace HoleyForkingShirt.Pages.Products
             Product = await _context.Products.FindAsync(id);
             return Page();
         }
-
+        /// <summary>
+        /// This method is what adds things to the detail page. 
+        /// </summary>
+        /// <param name="inputId"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnPost(string inputId)
         {
             int productId = Int32.Parse(inputId);

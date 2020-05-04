@@ -34,6 +34,10 @@ namespace HoleyForkingShirt.Pages.Cart
             _emailSender = emailSender;
             Total = 0;
         }
+        /// <summary>
+        /// This is our method to check the cart of a user. 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync()
         {
             var signedIn = _signInManager.IsSignedIn(User);
@@ -63,7 +67,10 @@ namespace HoleyForkingShirt.Pages.Cart
             }
 
         }
-
+        /// <summary>
+        /// This method sends an email based on what was in your cart at checkout. 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             StringBuilder sb = new StringBuilder();
