@@ -25,6 +25,10 @@ namespace HoleyForkingShirt
             _userManager = userManager;
             _cartManager = cartManager;
         }
+        /// <summary>
+        /// This method prints your receipt onto the page. 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnGet()
         {
             var userId = _userManager.GetUserId(User);
