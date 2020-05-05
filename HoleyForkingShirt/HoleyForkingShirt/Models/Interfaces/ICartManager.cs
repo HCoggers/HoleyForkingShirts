@@ -16,6 +16,7 @@ namespace HoleyForkingShirt.Models.Interfaces
 
         public Task<List<CartItems>> GetAllItems(int cartId);
 
+        public Task<decimal> GetTotal(int cartId);
 
         // UPDATE
         public Task UpdateCart(int id, Cart cart);

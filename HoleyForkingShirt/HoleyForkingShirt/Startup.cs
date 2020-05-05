@@ -37,7 +37,7 @@ namespace HoleyForkingShirt
 
             services.AddDbContext<ApplicationDBContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultUserConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("ProductionUserConnection"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -46,7 +46,7 @@ namespace HoleyForkingShirt
 
             services.AddDbContext<StoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultStoreConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("ProductionStoreConnection"));
             });
 
             services.AddAuthorization(options =>

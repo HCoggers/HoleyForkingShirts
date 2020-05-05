@@ -18,7 +18,7 @@ namespace HoleyForkingShirt.Models.Services
             _config = configuration;
         }
 
-        public string Run(string cardtype)
+        public string Run(string cardtype, customerAddressType details)
         {
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
 
@@ -67,7 +67,7 @@ namespace HoleyForkingShirt.Models.Services
                     break;
             }
 
-            customerAddressType billingAddress = GetAddress("someUserID");
+            customerAddressType billingAddress = details;
 
             var paymentType = new paymentType { Item = creditCard };
 
@@ -97,18 +97,20 @@ namespace HoleyForkingShirt.Models.Services
             return "fail";
         }
 
-        public customerAddressType GetAddress(string userName)
+        public customerAddressType GetAddress(string firstname, string lastname, string address, string city, string state, string country)
         {
-            customerAddressType address = new customerAddressType
+            customerAddressType shipping = new customerAddressType
             {
-                address = "123 stuff street",
-                city = "Seattle",
-                zip = "98338",
-                firstName = "bob",
-                lastName = "builder"
+
+                firstName = firstname,
+                lastName = lastname,
+                address = address,
+                city = city,
+                state = state,
+                country = country
             };
 
-            return address;
+            return shipping;
         }
 
     }
