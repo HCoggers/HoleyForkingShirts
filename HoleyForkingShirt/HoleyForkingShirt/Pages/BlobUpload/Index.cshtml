@@ -1,0 +1,20 @@
+﻿@page
+@model HoleyForkingShirt.Pages.BlobUpload.IndexModel
+@{
+}
+
+<main>
+
+    <form enctype="multipart/form-data" method="post">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" type="text" />
+
+        <label asp-for="Image"></label>
+        <input asp-for="Image" type="file" />
+
+        <button type="submit">UPLOAD IMAGE</button>
+    </form>
+
+    <img src="https://hfshirtsblob.blob.core.windows.net/products/thing" />
+
+</main>
