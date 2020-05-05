@@ -32,26 +32,39 @@ namespace HoleyForkingShirt.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Receipt(string firstname, string lastname, string address, string city, string state, string country)
+        {
+
+            var details = _payment.GetAddress(firstname, lastname, address, city, state, country);
+            return View(details);
+        }
+
         /// <summary>
-        /// This method sends an email based on what was in your cart at checkout. 
+        /// This method sends a payment request, and if it is successful, sends an email based on what was in your cart at checkout. 
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Payment(string cardtype)
+        public async Task<IActionResult> Payment(string cardtype, string firstname, string lastname, string address, string city, string state, string country)
         {
-            var response = _payment.Run(cardtype);
 
-            if(response == "success")
+            var details = _payment.GetAddress(firstname, lastname, address, city, state, country);
+            var response = _payment.Run(cardtype, details);
+            var userId = _userManager.GetUserId(User);
+
+            if (response == "success")
             {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine("<h1> Order Details:</h1>");
-                sb.AppendLine($"<p> {User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value} </ p >");
+                sb.AppendLine($"<p>Name: {details.firstName} {details.lastName}</ p >");
+                sb.AppendLine($"<p>Address: {details.address}</ p >");
+                sb.AppendLine($"<p>{details.city}, {details.state}, {details.country}</ p >");
                 sb.AppendLine("<h2> Cart:</h2>");
                 sb.AppendLine("<table><tr><th> Product </th>");
                 sb.AppendLine("<th> Qty </th>");
                 sb.AppendLine("<th> Price </th></tr>");
 
-                int cartID = _cartManager.GetCart(_userManager.GetUserId(User)).Result.ID;
+                int cartID = _cartManager.GetCart(userId).Result.ID;
                 decimal total = 0m;
 
                 foreach (var item in await _cartManager.GetAllItems(cartID))
@@ -61,7 +74,8 @@ namespace HoleyForkingShirt.Controllers
                 }
                 sb.AppendLine($"</table><p> Total: ${total} </p>");
                 await _emailSender.SendEmailAsync(User.Claims.First(c => c.Type == ClaimTypes.Email).Value, "Here is your receipt.", sb.ToString());
-                return RedirectToPage("/Checkout/Receipt");
+
+                return RedirectToAction("Receipt", new { firstname, lastname, address, city, state, country });
             }
 
             return RedirectToAction("Index");

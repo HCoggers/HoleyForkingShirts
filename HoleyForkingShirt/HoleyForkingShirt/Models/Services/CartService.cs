@@ -78,5 +78,14 @@ namespace HoleyForkingShirt.Models.Services
             _context.Carts.Update(cart);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<decimal> GetTotal(int cartId)
+        {
+            List<CartItems> items = await GetAllItems(cartId);
+            decimal total = 0;
+            foreach (var item in items)
+                total += item.Product.Price;
+            return total;
+        }
     }
 }

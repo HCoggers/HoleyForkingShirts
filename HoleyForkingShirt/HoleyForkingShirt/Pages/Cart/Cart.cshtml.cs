@@ -21,19 +21,15 @@ namespace HoleyForkingShirt.Pages.Cart
         private ICartManager _cartManager; 
         private SignInManager<ApplicationUser> _signInManager;
         private UserManager<ApplicationUser> _userManager;
-        private IEmailSender _emailSender;
-        private IPayment _payment;
 
         public List<CartItems> InCart;
         public decimal Total;
 
-        public CartModel(ICartManager cartManager, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender, IPayment payment)
+        public CartModel(ICartManager cartManager, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _cartManager = cartManager;
             _signInManager = signInManager;
             _userManager = userManager;
-            _emailSender = emailSender;
-            _payment = payment;
             Total = 0;
         }
         /// <summary>
@@ -68,30 +64,6 @@ namespace HoleyForkingShirt.Pages.Cart
                 return RedirectToPage("/Account/Login");
             }
 
-        }
-        /// <summary>
-        /// This method sends an email based on what was in your cart at checkout. 
-        /// </summary>
-        /// <returns></returns>
-        public async Task<IActionResult> OnPostAsync()
-        {/*
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<h1> Order Details:</h1>");
-            sb.AppendLine($"<p> {User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value} </ p >");
-            sb.AppendLine("<h2> Cart:</h2>");
-            sb.AppendLine("<table><tr><th> Product </th>");
-            sb.AppendLine("<th> Qty </th>");
-            sb.AppendLine("<th> Price </th></tr>");
-
-            int cartID = _cartManager.GetCart(_userManager.GetUserId(User)).Result.ID;
-            foreach (var item in await _cartManager.GetAllItems(cartID))
-            {
-                sb.AppendLine($" <tr> <td> {item.Product.Name} </td> <td> {item.Qty} </td> <td>${item.Product.Price} </td> </tr>");
-                Total += item.Product.Price;
-            }
-            sb.AppendLine($"</table><p> Total: ${Total} </p>");
-            await _emailSender.SendEmailAsync(User.Claims.First(c => c.Type == ClaimTypes.Email).Value, "Here is your receipt.", sb.ToString());*/
-            return RedirectToAction("Checkout");
         }
     }
 }

@@ -9,13 +9,40 @@
         {
             <p>Transaction Failed.</p>
         }
-        <form asp-action="Payment" method="post">
+    <form asp-action="Payment" method="post">
+        <label>
+            First Name:
+            <input required type="text" name="firstname" />
+        </label>
+        <label>
+            Last Name:
+            <input required type="text" name="lastname" />
+        </label>
+        <label>
+            Address:
+            <input required type="text" name="address" />
+        </label>
+        <label>
+            City:
+            <input required type="text" name="city" />
+        </label>
+        <label>
+            State
+            <input required type="text" name="state" maxlength="2" />
+        </label>
+        <label>
+            Country
+            <input required type="text" name="country" />
+        </label>
+        <label>
+            Payment Method:
             <select name="cardtype">
                 <option value="visa">VISA</option>
                 <option value="master">Mastercard</option>
                 <option value="amex">American Express</option>
                 <option value="discover">Discover</option>
             </select>
-            <button type="submit"></button>
-        </form>
+        </label>
+        <button type="submit"></button>
+    </form>
     </main>

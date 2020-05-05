@@ -1,9 +1,13 @@
-﻿@page
-@model HoleyForkingShirt.ReceiptModel
-@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
+@using AuthorizeNet.Api.Contracts.V1;
 @using HoleyForkingShirt.Models
+@using HoleyForkingShirt.Models.Interfaces
+
+@model customerAddressType
+
 @inject UserManager<ApplicationUser> UserManager
+@inject ICartManager  CartManager
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Index";
@@ -11,7 +15,16 @@
     <main>
         <h1>Order Details:</h1>
 
-        <p>@User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value</p>
+        <p>
+            Name: @Model.firstName @Model.lastName
+        </p>
+        <p>
+            Address: @Model.address
+        </p>
+        <p>
+            @Model.city, @Model.state, @Model.country
+        </p>
+
         <h2>RECEIPT:</h2>
         <table>
             <thead>
@@ -22,7 +35,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.InCart)
+                @*
+                    // It's not pretty, butt it works!
+                *@
+                @foreach (var item in CartManager.GetAllItems(CartManager.GetCart(UserManager.GetUserId(User)).Result.ID).Result)
                 {
                     <tr>
                         <td>@item.Product.Name</td>
@@ -35,7 +51,7 @@
                 <tr>
                     <td>Total</td>
                     <td></td>
-                    <td>$@Model.Total</td>
+                    <td>$@CartManager.GetTotal(CartManager.GetCart(UserManager.GetUserId(User)).Result.ID).Result</td>
                 </tr>
             </tfoot>
         </table>
