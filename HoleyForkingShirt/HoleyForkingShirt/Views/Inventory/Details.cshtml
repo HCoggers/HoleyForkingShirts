@@ -6,6 +6,7 @@
 }
 @model HoleyForkingShirt.Models.Product
 
+
     <main class="details container">
         <div class="row">
             <div class="col-6">
@@ -19,7 +20,7 @@
 
             <div class="col-6 newproduct">
                 <p class="subtitle">UPDATE</p>
-                <form asp-action="UpdateProduct">
+                <form enctype="multipart/form-data" asp-action="UpdateProduct">
                     <input type="hidden" name="id" value="@Model.ID" />
                     <label>
                         Product:
@@ -45,8 +46,8 @@
                         <input required type="number" name="price" value="@Model.Price" />
                     </label>
                     <label>
-                        Image (URL):
-                        <input required type="text" name="image" value="@Model.Image" />
+                        Image:
+                        <input required type="file" name="image" />
                     </label>
                     <label>
                         SKU #:
