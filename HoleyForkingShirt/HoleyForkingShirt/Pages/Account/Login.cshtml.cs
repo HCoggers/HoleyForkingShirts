@@ -56,7 +56,7 @@ namespace HoleyForkingShirt.Pages.Account
                             }
                         }
                     }
-                    if (!await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
                         return RedirectToPage("/Admin/Dashboard");
                     return RedirectToAction("Index", "Home");
                 }
