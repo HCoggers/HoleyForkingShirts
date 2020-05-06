@@ -37,7 +37,7 @@ namespace HoleyForkingShirt
 
             services.AddDbContext<ApplicationDBContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ProductionUserConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultUserConnection"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -46,7 +46,7 @@ namespace HoleyForkingShirt
 
             services.AddDbContext<StoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ProductionStoreConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultStoreConnection"));
             });
 
             services.AddAuthorization(options =>
@@ -58,6 +58,7 @@ namespace HoleyForkingShirt
             services.AddTransient<ICartManager, CartService>();
             services.AddTransient<IEmailSender, SendGridService>();
             services.AddTransient<IPayment, PaymentService>();
+            services.AddTransient<IOrderManager, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

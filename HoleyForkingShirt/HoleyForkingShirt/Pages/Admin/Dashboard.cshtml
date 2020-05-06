@@ -10,14 +10,17 @@
         <h1><span class="subtitle">Welcome to the</span><br />Admin Dashboard</h1>
     </div>
     <div class="row">
-        <a class="col-6" id="shop" asp-action="Index" asp-controller="Inventory">
+        <a class="col-4" id="shop" asp-action="Index" asp-controller="Inventory">
             <div>
                 <p>Manage Inventory</p>
             </div>
         </a>
-        <a class="col-6" id="featured" asp-action="Index" asp-controller="Home">
+        <a class="col-4" id="featured" asp-action="Index" asp-controller="Home">
             <h3 class="subtitle">Home</h3>
             <p>return to the <br /> HFS <br />landing page</p>
+        </a>
+        <a class="col-4" id="orders" asp-page="/Admin/Orders">
+            <h3 class="subtitle">Manage Orders</h3>
         </a>
     </div>
 </main>

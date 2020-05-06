@@ -1,0 +1,20 @@
+﻿@page "{id:int?}"
+@model HoleyForkingShirt.Pages.Admin.OrderDetailsModel
+
+@using Microsoft.AspNetCore.Identity
+@using HoleyForkingShirt.Models
+
+@{
+    ViewData["Title"] = $"Order #{Model.Order.Id}";
+    Layout = "_Layout";
+}
+
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+<main class="details">
+    <h2 class="subtitle">Order #@Model.Order.Id</h2>
+
+    @Html.Raw(Model.Order.SB)
+
+</main>

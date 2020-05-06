@@ -17,13 +17,15 @@ namespace HoleyForkingShirt.Controllers
         private UserManager<ApplicationUser> _userManager;
         private IEmailSender _emailSender;
         private IPayment _payment;
+        private IOrderManager _orderManager;
 
-        public CheckoutController(ICartManager cartManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender, IPayment payment)
+        public CheckoutController(ICartManager cartManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender, IPayment payment, IOrderManager orderManager)
         {
             _cartManager = cartManager;
             _userManager = userManager;
             _emailSender = emailSender;
             _payment = payment;
+            _orderManager = orderManager;
         }
 
         [HttpGet]
@@ -74,6 +76,19 @@ namespace HoleyForkingShirt.Controllers
                 }
                 sb.AppendLine($"</table><p> Total: ${total} </p>");
                 await _emailSender.SendEmailAsync(User.Claims.First(c => c.Type == ClaimTypes.Email).Value, "Here is your receipt.", sb.ToString());
+
+                Order order = new Order
+                {
+                    UserId = userId,
+                    Date = DateTime.Now,
+                    Total = total,
+                    SB = sb.ToString()
+                    
+                };
+
+                await _orderManager.CreateOrder(order);
+
+
 
                 return RedirectToAction("Receipt", new { firstname, lastname, address, city, state, country });
             }
