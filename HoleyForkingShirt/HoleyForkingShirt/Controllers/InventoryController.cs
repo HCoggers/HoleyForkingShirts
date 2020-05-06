@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HoleyForkingShirt.Data;
 using HoleyForkingShirt.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,8 +21,14 @@ namespace HoleyForkingShirt.Controllers
         private StoreDbContext _context;
         private IInventory _inventory;
 
-        public InventoryController(StoreDbContext context, IInventory inventory)
+        public Blob Blob { get; set; }
+
+        [BindProperty]
+        public IFormFile Image { get; set; }
+
+        public InventoryController(StoreDbContext context, IInventory inventory, IConfiguration configuration)
         {
+            Blob = new Blob(configuration);
             _context = context;
             _inventory = inventory;
         }
@@ -36,14 +45,28 @@ namespace HoleyForkingShirt.Controllers
             var product = await _context.Products.FindAsync(id);
             return View(product);
         }
+
         [HttpPost, ActionName("UpdateProduct")]
-        public async Task<IActionResult> UpdateProduct(string name, string description, int price, string sku, int id, string size, string image)
+        public async Task<IActionResult> UpdateProduct(string name, string description, int price, string sku, int id, string size, IFormFile image)
         {
+            var path = Path.GetTempFileName();
+
+            using (var stream = System.IO.File.Create(path))
+            {
+               
+                await image.CopyToAsync(stream);
+            }
+
+            await Blob.UploadFileAsync("products", name, path);
+
+            var blob = await Blob.GetBlobAsync(name, "products");
+            var uri = blob.Uri;
+
             Product updatedProduct = await _context.Products.FindAsync(id);
             updatedProduct.Name = name;
             updatedProduct.Description = description;
             updatedProduct.Sku = sku;
-            updatedProduct.Image = image;
+            updatedProduct.Image = uri.ToString();
             updatedProduct.Price = price;
             updatedProduct.Size = Enum.Parse<Sizes>(size);
 
