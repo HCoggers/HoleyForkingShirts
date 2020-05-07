@@ -8,10 +8,6 @@
 
 @inject UserManager<ApplicationUser> UserManager
 @inject ICartManager  CartManager
-@{
-    Layout = "_Layout";
-    ViewData["Title"] = "Index";
-}
     <main>
         <h1>Order Details:</h1>
 
@@ -55,4 +51,8 @@
                 </tr>
             </tfoot>
         </table>
+        <form asp-action="Confirm" method="post">
+            <input hidden name="userId" value="@UserManager.GetUserId(User)" />
+            <button type="submit">Confirm and return to Shopping</button>
+        </form>
     </main>

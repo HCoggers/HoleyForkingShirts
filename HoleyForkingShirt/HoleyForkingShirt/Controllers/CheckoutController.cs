@@ -88,12 +88,20 @@ namespace HoleyForkingShirt.Controllers
 
                 await _orderManager.CreateOrder(order);
 
-
-
                 return RedirectToAction("Receipt", new { firstname, lastname, address, city, state, country });
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Confirm(string userId)
+        {
+            var cart = await _cartManager.GetCart(userId);
+            cart.CartItems = new List<CartItems>();
+            await _cartManager.UpdateCart(cart.ID, cart);
+
+            return RedirectToPage("/Products/Shop");
         }
     }
 }

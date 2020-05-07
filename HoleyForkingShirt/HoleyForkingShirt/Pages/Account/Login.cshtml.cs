@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HoleyForkingShirt.Models;
+using HoleyForkingShirt.Models.Interfaces;
 using HoleyForkingShirt.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +15,15 @@ namespace HoleyForkingShirt.Pages.Account
     {
         private SignInManager<ApplicationUser> _signInManager;
         private UserManager<ApplicationUser> _userManager;
+        private ICartManager _cartManager;
 
         [BindProperty]
         public LoginViewModel Input { get; set; }
-        public LoginModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ICartManager cartManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _cartManager = cartManager;
         }
         public void OnGet()
         {
@@ -37,6 +40,15 @@ namespace HoleyForkingShirt.Pages.Account
                 if(result.Succeeded)
                 {
                     var user = _userManager.Users.Where(u => u.Email == Input.Email).FirstOrDefault();
+
+                    // CREATE PERSONAL CART IF USER HAS NONE
+                    if (_cartManager.GetCart(user.Id).Result == null)
+                        await _cartManager.CreateCart(new Models.Cart
+                        {
+                            UserId = user.Id,
+                            CartItems = new List<CartItems>()
+                        });
+
                     if (!await _userManager.IsInRoleAsync(user, ApplicationRoles.Member))
                     {
                         await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
