@@ -10,19 +10,27 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
 
-    <main class="details">
+    <div class="details">
         <img class="productimage" src="@Model.Product.Image" />
         <h2 class="subtitle">@Model.Product.Name</h2>
         <p>@Model.Product.Description</p>
         <p>Size: @Model.Product.Size</p>
         <p>$@Model.Product.Price</p>
+
+        <div class="row">
+            <a class="col-2 back" asp-page="/Products/Shop">Keep Shopping</a>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <form class="col-6" method="post">
+                    <input hidden name="inputId" value="@Model.Product.ID" />
+                    <button class="back" action="submit">Add To Cart</button>
+                </form>
+            }
+        </div>
+
         @if (SignInManager.IsSignedIn(User))
         {
-            <form method="post">
-                <input hidden name="inputId" value="@Model.Product.ID" />
-                <button action="submit">Add To Cart</button>
-            </form>
             @await Component.InvokeAsync("MiniCart")
         }
 
-    </main>
+    </div>

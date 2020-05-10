@@ -4,7 +4,6 @@
 
 }
 
-    <main>
         @if(Model)
         {
             <p>Transaction Failed.</p>
@@ -36,13 +35,13 @@
         </label>
         <label>
             Payment Method:
-            <select name="cardtype">
+            <select required name="cardtype">
                 <option value="visa">VISA</option>
                 <option value="master">Mastercard</option>
                 <option value="amex">American Express</option>
                 <option value="discover">Discover</option>
             </select>
         </label>
-        <button type="submit"></button>
+        <p class="forminfo">(Disclaimer) No actual transactions will be performed. Currently, these are only proof-of-concept</p>
+        <button type="submit">Submit</button>
     </form>
-    </main>

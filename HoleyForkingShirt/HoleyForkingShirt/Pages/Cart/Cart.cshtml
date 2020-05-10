@@ -5,15 +5,15 @@
     Layout = "_Layout";
 }
 
-    <main class="checkout">
+    <div class="checkout">
         <h2 class="subtitle">Cart</h2>
-
         <table>
             <thead>
                 <tr>
                     <th>Product</th>
                     <th>Qty</th>
                     <th>Price</th>
+                    <th> </th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +27,12 @@
                         </td>
                         <td>(@item.Qty)</td>
                         <td>$@item.Product.Price</td>
+                        <td>
+                            <form method="post">
+                                <input hidden name="productid" value="@item.Product.ID" />
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -35,10 +41,13 @@
                     <td>Total: </td>
                     <td></td>
                     <td>$@Model.Total</td>
+                    <td></td>
                 </tr>
             </tfoot>
         </table>
         <br />
-        <a asp-action="Index" asp-controller="Checkout">Check Out</a>
-        
-    </main>
+        <div class="row">
+            <a class="col-4 back" asp-page="/Products/Shop">Keep Shopping</a>
+            <a class="col-4 back" asp-action="Index" asp-controller="Checkout">Check Out</a>
+        </div>
+    </div>

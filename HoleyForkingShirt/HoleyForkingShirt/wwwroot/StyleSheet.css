@@ -42,6 +42,7 @@ a, a:hover {
 
 main {
     max-width: 960px;
+    min-width: 50vw;
     margin: 0 auto;
     background-color: hsla(200, 100%, 5%, 0.70);
     color: antiquewhite ;
@@ -107,14 +108,15 @@ main {
     color: antiquewhite;
     font-size: 500%;
     font-family: 'Dancing Script', cursive;
-    background-image: url(https://c1.wallpaperflare.com/preview/632/667/832/apparel-clothing-fashion-hangers.jpg)
+    background-image: url(https://c1.wallpaperflare.com/preview/632/667/832/apparel-clothing-fashion-hangers.jpg);
+    background-size:cover;
 }
     #shop > div {
         background-color: hsl(200, 100%, 10%);
         width: 100%;
         height: 100%;
     }
-        #shop > div > p {
+        #shop > div > p, .homelink {
             margin: 0;
             position: absolute;
             top: 50%;
@@ -257,6 +259,10 @@ footer {
     width: 50%;
 }
 
+table {
+    margin: 0 auto;
+}
+
 th {
     background-color: hsl(200, 100%, 10%);
     padding: .5em 1em .2em;
@@ -275,7 +281,7 @@ tfoot {
 table a {
     color: hsl(200, 100%, 10%);
 }
-table a:hover {
+table a:hover, table button:hover {
     color: aquamarine;
 }
 
@@ -312,6 +318,27 @@ table a:hover {
     border: none;
     border-radius: 10px;
     margin: auto;
+}
+
+.back {
+    border: none;
+    color: #343a40;
+    padding: .5em;
+    background-color: aquamarine;
+    margin: 0 auto 1em;
+}
+    .back:hover {
+        transition-duration: 0.2s;
+        color: aquamarine;
+        background-color: #343a40;
+    }
+
+.admin {
+    font-size: 70%;
+}
+
+#orders {
+
 }
 
 @media only screen and (max-width: 900px) {

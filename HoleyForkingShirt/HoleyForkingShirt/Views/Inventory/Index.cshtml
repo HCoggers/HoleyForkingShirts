@@ -4,61 +4,59 @@
     ViewData["Title"] = "Products Manager";
 }
 
-<main>
-    <h2 class="subtitle">Manage Products</h2>
+        <h2 class="subtitle">Manage Products</h2>
+        <a class="back" asp-page="/Admin/Dashboard">Return To Dashboard</a>
 
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-4 product newproduct">
-                <p class="subtitle">NEW</p>
-                <form class="overlay" asp-action="CreateProduct">
-                    <label>
-                        Product:
-                        <input required type="text" name="name" />
-                    </label>
-                    <label>
-                        Description:
-                        <textarea required type="text" name="description"></textarea>
-                    </label>
-                    <label>
-                        Size:
-                        <select required name="size">
-                            <option value="0">XS</option>
-                            <option value="1">S</option>
-                            <option value="2">M</option>
-                            <option value="3">L</option>
-                            <option value="4">XL</option>
-                            <option value="5">XXL</option>
-                        </select>
-                    </label>
-                    <label>
-                        Price:
-                        <input required type="number" name="price" step="any" min="0.01" />
-                    </label>
-                    <label>
-                         Image:
-                        <input required type="file" name="image" />
-                    </label>
-                    <label>
-                        SKU #:
-                        <input required type="text" name="sku" />
-                    </label>
-                    <button type="submit">Create</button>
-                </form>
-            </div>
-            @foreach (var product in Model)
-            {
-                <div class="col-4 product">
-                    <a asp-action="Details" asp-controller="Inventory" asp-route-id="@product.ID">
-                        <img src="@product.Image" class="img-fluid" />
-                        <p>@product.Name</p>
-                        <p>($@product.Price)</p>
-                    </a>
+                <div class="col-4 product newproduct">
+                    <p class="subtitle">NEW</p>
+                    <form class="overlay" asp-action="CreateProduct">
+                        <label>
+                            Product:
+                            <input required type="text" name="name" />
+                        </label>
+                        <label>
+                            Description:
+                            <textarea required type="text" name="description"></textarea>
+                        </label>
+                        <label>
+                            Size:
+                            <select required name="size">
+                                <option value="0">XS</option>
+                                <option value="1">S</option>
+                                <option value="2">M</option>
+                                <option value="3">L</option>
+                                <option value="4">XL</option>
+                                <option value="5">XXL</option>
+                            </select>
+                        </label>
+                        <label>
+                            Price:
+                            <input required type="number" name="price" step="any" min="0.01" />
+                        </label>
+                        <label>
+                            Image:
+                            <input required type="file" name="image" />
+                        </label>
+                        <label>
+                            SKU #:
+                            <input required type="text" name="sku" />
+                        </label>
+                        <button type="submit">Create</button>
+                    </form>
                 </div>
-            }
+                @foreach (var product in Model)
+                {
+                    <div class="col-4 product">
+                        <a asp-action="Details" asp-controller="Inventory" asp-route-id="@product.ID">
+                            <img src="@product.Image" class="img-fluid" />
+                            <p>@product.Name</p>
+                            <p>($@product.Price)</p>
+                        </a>
+                    </div>
+                }
+            </div>
         </div>
-        <a asp-page="/Admin/Dashboard">Return To Dashboard</a>
-    </div>
-</main>
