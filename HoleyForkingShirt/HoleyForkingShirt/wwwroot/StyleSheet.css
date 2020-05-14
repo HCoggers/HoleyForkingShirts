@@ -9,14 +9,14 @@ nav > form {
     text-align: right;
     padding: 0;
 }
-    nav>form>button {
+    nav>form>button, nav.navbar-dark>a.navbar-text {
         padding: .5em 1em;
         background-color: transparent;
         border: none;
         color:aquamarine;
     }
 
-        nav > form > button:hover {
+        nav > form > button:hover, nav>a.navbar-text:hover {
             transition-duration: 0.5s;
             color: #343a40;
             background-color: aquamarine;
@@ -25,6 +25,11 @@ nav > form {
 h2, h1 {
     font-family: 'Montserrat', sans-serif;
 }
+
+    h2.subtitle {
+        text-align: center;
+        font-size: 7vh;
+    }
 
 a, a:hover {
     text-decoration: none;
@@ -37,12 +42,18 @@ a, a:hover {
 
 main {
     max-width: 960px;
+    min-width: 50vw;
     margin: 0 auto;
     background-color: hsla(200, 100%, 5%, 0.70);
     color: antiquewhite ;
     font-family: 'Montserrat', sans-serif;
     display: grid;
 }
+
+    main > * {
+        text-align: center;
+    }
+
 .row {
     width: 100%;
     margin: 0;
@@ -92,19 +103,20 @@ main {
     display: none;
 }
 
-#shop {
+#shop { 
     padding: 0;
     color: antiquewhite;
     font-size: 500%;
     font-family: 'Dancing Script', cursive;
-    background-image: url(https://c1.wallpaperflare.com/preview/632/667/832/apparel-clothing-fashion-hangers.jpg)
+    background-image: url(https://c1.wallpaperflare.com/preview/632/667/832/apparel-clothing-fashion-hangers.jpg);
+    background-size:cover;
 }
     #shop > div {
         background-color: hsl(200, 100%, 10%);
         width: 100%;
         height: 100%;
     }
-        #shop > div > p {
+        #shop > div > p, .homelink {
             margin: 0;
             position: absolute;
             top: 50%;
@@ -122,7 +134,7 @@ main {
 }
 
 .img-fluid {
-    height: 20vw;
+    height: 30vh;
     width: 100%;
     object-fit: cover;
 }
@@ -131,6 +143,202 @@ footer {
     background-color: aliceblue;
     text-align: center;
     color: #343a40;
+}
+
+.cart {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 20vw;
+    z-index: 1;
+    background-color: hsl(200, 100%, 10%);
+    color: antiquewhite;
+    padding: 1em 1em;
+    border-radius: 20px 20px 0 0;
+}
+
+.cart label:hover {
+    cursor: pointer;
+}
+
+.toggle {
+    transition: max-height 1.5s;
+    background-color: aliceblue;
+    color: #343a40;
+    max-height: 0;
+    overflow: auto;
+}
+    .toggle a {
+        background-color: hsl(200, 100%, 10%);
+        padding: 1em;
+        display:block;
+        position: sticky;
+        bottom: 0;
+        text-align:center;
+        color: antiquewhite;
+    }
+        .toggle a:hover {
+            font-style: oblique;
+            background-color: hsl(200, 100%, 20%);
+        }
+.items {
+    padding: .5em;
+}
+
+#minimize:checked + .toggle {
+    max-height: 40vh;
+}
+#minimize {
+    display: none;
+}
+#Qty {
+    font-style:oblique;
+}
+
+.product {
+    font-size: 2vh;
+    min-width: 30%;
+    margin-bottom: 20px;
+}
+
+    .product a {
+        color: aliceblue;
+    }
+
+    .product p {
+        width: 100%;
+        margin: 0;
+        padding: .5em;
+    }
+
+        .product p:first-of-type {
+            font-weight: bolder;
+            word-break: normal;
+            background-color: hsl(200, 100%, 10%);
+            font-size: 2.5vh;
+        }
+
+        .product p:last-child {
+            border-radius: 0 0 20px 20px;
+            background-color: aliceblue;
+            color: hsla(200, 100%, 10%, .5);
+        }
+
+    .product img {
+        border-radius: 20px 20px 0 0;
+    }
+
+    .product a img:hover {
+        filter: greyscale(100%);
+    }
+
+.details, .checkout {
+    padding: 2em;
+}
+
+    .checkout p:last-of-type {
+        margin: 1em  0;
+        padding: .5em;
+        background-color: aliceblue;
+        color: #343a40;
+    }
+    .checkout button {
+        margin-left: auto;
+        padding: 1em;
+        background-color: hsl(200, 100%, 5%);
+        color: antiquewhite;
+        border: none;
+    }
+        .checkout button:hover {
+            background-color: hsl(200, 100%, 15%);
+        }
+
+.productimage {
+    border-radius: 5%;
+    margin: 0 auto;
+    width: 50%;
+}
+
+table {
+    margin: 0 auto;
+}
+
+th {
+    background-color: hsl(200, 100%, 10%);
+    padding: .5em 1em .2em;
+}
+
+td {
+    background-color: aliceblue;
+    padding: .2em 1em;
+    color: hsla(200, 100%, 10%, .5);
+}
+
+tfoot {
+    border-top: solid 1px hsl(200, 100%, 10%);
+}
+
+table a {
+    color: hsl(200, 100%, 10%);
+}
+table a:hover, table button:hover {
+    color: aquamarine;
+}
+
+.admin {
+    min-height: 70vh;
+}
+
+.newproduct {
+    background-color: hsl(200, 100%, 10%);
+    color: aquamarine;
+    cursor: pointer;
+    padding: 2em;
+    font-size: 1.5vh;
+    text-align: left;
+    display: block;
+    border-radius: 20px;
+    margin: auto;
+}
+
+.newproduct .subtitle {
+    font-size:3vh;
+}
+
+.newproduct input, .newproduct label, .newproduct select, .newproduct textarea {
+    display: block;
+    width: 100%;
+}
+
+.newproduct button {
+    width:100%;
+    background-color:aquamarine;
+    color: hsl(200, 100%, 10%);
+    font-size: 2em;
+    border: none;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.back {
+    border: none;
+    color: #343a40;
+    padding: .5em;
+    background-color: aquamarine;
+    margin: 0 auto 1em;
+}
+    .back:hover {
+        transition-duration: 0.2s;
+        color: aquamarine;
+        background-color: #343a40;
+    }
+
+.admin {
+    font-size: 70%;
+}
+
+#orders {
+
 }
 
 @media only screen and (max-width: 900px) {

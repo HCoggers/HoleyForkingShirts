@@ -1,0 +1,36 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using HoleyForkingShirt.Models.Interfaces
+@using HoleyForkingShirt.Models
+@model HoleyForkingShirt.Pages.Admin.OrdersModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Manage Orders";
+}
+
+@inject IOrderManager OrderManager
+@inject UserManager<ApplicationUser> UserManager
+
+        <h2>ORDERS:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Order Placed:</th>
+                    <th>Total</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in OrderManager.GetOrders().Result)
+                {
+                    <tr>
+                        <td>@UserManager.Users.First(u => u.Id == order.UserId).FirstName @UserManager.Users.First(u => u.Id == order.UserId).LastName</td>
+                        <td>@order.Date</td>
+                        <td>$@order.Total</td>
+                        <td><a asp-page="/Admin/OrderDetails" asp-route-id="@order.Id">DETAILS</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="col-4 back" asp-page="/Admin/Dashboard">Return to Dashboard</a>

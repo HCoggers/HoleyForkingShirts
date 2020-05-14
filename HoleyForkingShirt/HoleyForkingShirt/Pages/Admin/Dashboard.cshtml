@@ -1,0 +1,28 @@
+﻿@page
+@model HoleyForkingShirt.Pages.Admin.DashboardModel
+@{
+      Layout = "_Layout";
+    ViewData["Title"] = "Admin Page";
+}
+
+<div class="admin">
+    <div class="row" id="title">
+        <h1><span class="subtitle">Welcome to the</span><br />Admin Dashboard</h1>
+    </div>
+    <div class="row">
+        <a class="col-4" id="shop" asp-action="Index" asp-controller="Inventory">
+            <div>
+                <p>Manage Inventory</p>
+            </div>
+        </a>
+        <a class="col-4" id="featured" asp-action="Index" asp-controller="Home">
+            <h3 class="subtitle">Home</h3>
+            <p>return to the <br /> HFS <br />landing page</p>
+        </a>
+        <a class="col-4" id="shop" asp-page="/Admin/Orders">
+            <div>
+                <p>Manage Orders</p>
+            </div>
+        </a>
+    </div>
+</div>

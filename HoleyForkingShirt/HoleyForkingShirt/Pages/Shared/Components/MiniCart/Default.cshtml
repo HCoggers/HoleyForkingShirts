@@ -1,0 +1,35 @@
+﻿@model IEnumerable<HoleyForkingShirt.Models.CartItems>
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using HoleyForkingShirt.Models
+@inject UserManager<ApplicationUser> UserManager
+
+
+<div class="cart">
+    <label for="minimize" class="subtitle">
+        <h3>
+            @User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value.Split(' ')[0]'s Cart
+        </h3>
+    </label>
+    <input type="checkbox" id="minimize" />
+    <div class="toggle">
+        <ul class="items">
+            @if (Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <p>@item.Product.Name (<span id="Qty">@item.Qty</span>)</p>
+                        <p>@(item.Product.Price * item.Qty)</p>
+                    </li>
+                }
+            }
+            else
+            {
+              <p>Your Cart is Empty.</p>
+            }
+
+        </ul>
+        <a asp-page="/Cart/Cart">View Cart + Checkout</a>
+    </div>
+</div>

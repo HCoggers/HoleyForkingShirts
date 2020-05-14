@@ -13,7 +13,10 @@ namespace HoleyForkingShirt.Data
         {
 
         }
-
+        /// <summary>
+        /// This is all the data that is seeded into our database for the products we are selling. 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasData(
@@ -118,9 +121,16 @@ namespace HoleyForkingShirt.Data
                     Image = "https://imgur.com/XNFTeA1.jpg"
                 }
                 );
+
+            modelBuilder.Entity<CartItems>().HasKey(c => new { c.CartID, c.ProductID });
         }
                 
-
+        /// <summary>
+        /// This is connecting our cart to our database. 
+        /// </summary>
         public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItems> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

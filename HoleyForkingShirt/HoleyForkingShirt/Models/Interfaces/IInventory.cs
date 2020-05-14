@@ -15,7 +15,7 @@ namespace HoleyForkingShirt.Models
         public Task<Product> GetProductById(int id);
 
         // UPDATE
-        public Task UpdateProduct(int id, Product product);
+        public Task UpdateProduct(Product product);
 
         // DELETE
         public Task DeleteProduct(int id);

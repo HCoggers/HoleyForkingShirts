@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using HoleyForkingShirt.Models.Services;
+using HoleyForkingShirt.Models.Interfaces;
 
 namespace HoleyForkingShirt
 {
@@ -48,11 +49,20 @@ namespace HoleyForkingShirt
                 options.UseSqlServer(Configuration.GetConnectionString("ProductionStoreConnection"));
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+            });
+
             services.AddTransient<IInventory, InventoryService>();
+            services.AddTransient<ICartManager, CartService>();
+            services.AddTransient<IEmailSender, SendGridService>();
+            services.AddTransient<IPayment, PaymentService>();
+            services.AddTransient<IOrderManager, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -62,6 +72,9 @@ namespace HoleyForkingShirt
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
+
+            RoleInitializer.SeedData(serviceProvider);
 
             app.UseStaticFiles();
 

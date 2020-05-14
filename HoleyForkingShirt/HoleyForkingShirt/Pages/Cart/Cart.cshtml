@@ -1,0 +1,53 @@
+﻿@page
+@model HoleyForkingShirt.Pages.Cart.CartModel
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "_Layout";
+}
+
+    <div class="checkout">
+        <h2 class="subtitle">Cart</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.InCart)
+                {
+                    <tr>
+                        <td>
+                            <a asp-page="/Products/Details" asp-route-id="@item.Product.ID">
+                                @item.Product.Name
+                            </a>
+                        </td>
+                        <td>(@item.Qty)</td>
+                        <td>$@item.Product.Price</td>
+                        <td>
+                            <form method="post">
+                                <input hidden name="productid" value="@item.Product.ID" />
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total: </td>
+                    <td></td>
+                    <td>$@Model.Total</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <br />
+        <div class="row">
+            <a class="col-4 back" asp-page="/Products/Shop">Keep Shopping</a>
+            <a class="col-4 back" asp-action="Index" asp-controller="Checkout">Check Out</a>
+        </div>
+    </div>

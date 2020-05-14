@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+@model HoleyForkingShirt.Models.Product
+
+
+    <div class="details container">
+        <div class="row">
+            <a class="back" asp-action="Index" asp-controller="Inventory">Manage Products</a>
+            <div class="col-6">
+                <img class="productimage" src="@Model.Image" />
+                <h2 class="subtitle">@Model.Name</h2>
+                <p>#@Model.Sku</p>
+                <p>@Model.Description</p>
+                <p>Size: @Model.Size</p>
+                <p>$@Model.Price</p>
+            </div>
+
+            <div class="col-6 newproduct">
+                <p class="subtitle">UPDATE</p>
+                <form enctype="multipart/form-data" asp-action="UpdateProduct">
+                    <input type="hidden" name="id" value="@Model.ID" />
+                    <label>
+                        Product:
+                        <input required type="text" name="name" value="@Model.Name" />
+                    </label>
+                    <label>
+                        Description:
+                        <textarea required type="text" name="description">@Model.Description</textarea>
+                    </label>
+                    <label>
+                        Size:
+                        <select required name="size">
+                            <option value="0">XS</option>
+                            <option value="1">S</option>
+                            <option value="2">M</option>
+                            <option value="3">L</option>
+                            <option value="4">XL</option>
+                            <option value="5">XXL</option>
+                        </select>
+                    </label>
+                    <label>
+                        Price:
+                        <input required type="number" name="price" value="@Model.Price" />
+                    </label>
+                    <label>
+                        Image:
+                        <input required type="file" name="image" />
+                    </label>
+                    <label>
+                        SKU #:
+                        <input required type="text" name="sku" value="@Model.Sku" />
+                    </label>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-2 newproduct">
+            <form asp-action="DeleteProduct">
+                <input type="hidden" name="id" value="@Model.ID" />
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    </div>

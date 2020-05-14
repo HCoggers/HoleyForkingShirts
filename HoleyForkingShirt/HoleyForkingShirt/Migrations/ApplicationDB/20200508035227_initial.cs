@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HoleyForkingShirt.Migrations
+namespace HoleyForkingShirt.Migrations.ApplicationDB
 {
-    public partial class intital : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,7 @@ namespace HoleyForkingShirt.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
-                    LatName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
                     BirthDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

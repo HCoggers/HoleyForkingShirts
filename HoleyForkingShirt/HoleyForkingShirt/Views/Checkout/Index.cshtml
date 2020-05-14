@@ -1,0 +1,47 @@
+﻿@model bool
+@{
+    Layout = "_Layout";
+
+}
+
+        @if(Model)
+        {
+            <p>Transaction Failed.</p>
+        }
+    <form asp-action="Payment" method="post">
+        <label>
+            First Name:
+            <input required type="text" name="firstname" />
+        </label>
+        <label>
+            Last Name:
+            <input required type="text" name="lastname" />
+        </label>
+        <label>
+            Address:
+            <input required type="text" name="address" />
+        </label>
+        <label>
+            City:
+            <input required type="text" name="city" />
+        </label>
+        <label>
+            State
+            <input required type="text" name="state" maxlength="2" />
+        </label>
+        <label>
+            Country
+            <input required type="text" name="country" />
+        </label>
+        <label>
+            Payment Method:
+            <select required name="cardtype">
+                <option value="visa">VISA</option>
+                <option value="master">Mastercard</option>
+                <option value="amex">American Express</option>
+                <option value="discover">Discover</option>
+            </select>
+        </label>
+        <p class="forminfo">(Disclaimer) No actual transactions will be performed. Currently, these are only proof-of-concept</p>
+        <button type="submit">Submit</button>
+    </form>
