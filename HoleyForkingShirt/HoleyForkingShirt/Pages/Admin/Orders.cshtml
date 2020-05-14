@@ -11,27 +11,26 @@
 @inject IOrderManager OrderManager
 @inject UserManager<ApplicationUser> UserManager
 
-<main>
-    <h2>ORDERS:</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Order Placed:</th>
-                <th>Total</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var order in OrderManager.GetOrders().Result)
-            {
+        <h2>ORDERS:</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td>@UserManager.Users.First(u => u.Id == order.UserId).FirstName @UserManager.Users.First(u => u.Id == order.UserId).LastName</td>
-                    <td>@order.Date</td>
-                    <td>$@order.Total</td>
-                    <td><a asp-page="/Admin/OrderDetails" asp-route-id="@order.Id">DETAILS</a></td>
+                    <th>User</th>
+                    <th>Order Placed:</th>
+                    <th>Total</th>
+                    <th>Details</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</main>
+            </thead>
+            <tbody>
+                @foreach (var order in OrderManager.GetOrders().Result)
+                {
+                    <tr>
+                        <td>@UserManager.Users.First(u => u.Id == order.UserId).FirstName @UserManager.Users.First(u => u.Id == order.UserId).LastName</td>
+                        <td>@order.Date</td>
+                        <td>$@order.Total</td>
+                        <td><a asp-page="/Admin/OrderDetails" asp-route-id="@order.Id">DETAILS</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="col-4 back" asp-page="/Admin/Dashboard">Return to Dashboard</a>

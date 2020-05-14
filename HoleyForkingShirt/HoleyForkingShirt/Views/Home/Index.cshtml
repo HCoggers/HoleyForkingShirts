@@ -3,72 +3,24 @@
 @using System.Security.Claims
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Holey Forking Shirts: Hello!</title>
-    <link rel="stylesheet" type="text/css" href="~/reset.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="~/StyleSheet.css" />
-</head>
-<body>
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" asp-page="/">
-            <h2>HFShirts <span class="subtitle">Every shirt deserves a second chance</span></h2>
+@{
+    Layout = "_Layout";
+}
+    <div class="row" id="title">
+        <h1><span class="subtitle">Welcome to</span><br />Holey Forking Shirts!</h1>
+    </div>
+    <div class="row">
+        <a class="col-6" id="shop" asp-page="/Products/Shop">
+            <div>
+                <p>Shop</p>
+            </div>
         </a>
-        @if (User.IsInRole("Admin"))
-        {
-            <a class="navbar-text" asp-page="/Products/Shop">Shop</a>
-            <a class="navbar-text mr-auto" asp-page="/Admin/Dashboard">Admins</a>
-        }
-        else
-        {
-            <a class="navbar-text mr-auto" asp-page="/Products/Shop">Shop</a>
-        }
-        @if (SignInManager.IsSignedIn(User))
-        {
-            <span class="navbar-text ml-auto"> Welcome back, @User.Claims.First(c => c.Type == ClaimTypes.GivenName).Value.Split(' ')[0]!</span>
-            <a class="navbar-text ml-3" asp-page="/Cart/Cart">My Cart</a>
-            <form class="form-inline ml-3" asp-page="/Account/Logout">
-                <button type="submit">Log Out</button>
-            </form>
-        }
-        else
-        {
-            <span class="navbar-text ml-auto">Welcome!</span>
-            <form class="form-inline ml-3" asp-page="/Account/Login"><button type="submit">Login</button></form>
-            <form class="form-inline" asp-page="/Account/Register"><button type="submit">Register</button></form>
-        }
-    </nav>
-    <main>
-        <div class="row" id="title">
-            <h1><span class="subtitle">Welcome to</span><br />Holey Forking Shirts!</h1>
-        </div>
-        <div class="row">
-            <a class="col-6" id="shop" asp-page="/Products/Shop">
-                <div>
-                    <p>Shop</p>
-                </div>
-            </a>
-            <a class="col-6" id="featured" asp-page="/Products/Details" asp-route-id="8">
-                <h3 class="subtitle">Featured Product</h3>
-                <p>
-                    Holey Blue Socks <br />
-                    Give that right big toe some breathing room with these un-darned socks!
-                </p>
-            </a>
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="container">
-            <p id="yes"> jon smells. jk best grader ever</p>
-            <span class="text-muted">Copyright &copy; 2020, by HoleyFork LLC</span>
-        </div>
-        <form asp-action="Payment" method="post">
-            <button type="submit">CLICK ME</button>
-        </form>
-    </footer>
-</body>
-</html>
+        <a class="col-6" id="featured" asp-page="/Products/Details" asp-route-id="8">
+            <h3 class="subtitle">Featured Product</h3>
+            <p>
+                Holey Blue Socks <br />
+                Give that right big toe some breathing room with these un-darned socks!
+            </p>
+        </a>
+    </div>
+    

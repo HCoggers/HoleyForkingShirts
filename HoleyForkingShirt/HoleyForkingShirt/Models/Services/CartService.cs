@@ -53,7 +53,10 @@ namespace HoleyForkingShirt.Models.Services
                 .Include(c => c.CartItems)
                 .ToListAsync();
 
-            return carts.First();
+            if (carts.Count > 0)
+                return carts.First();
+            else
+                return null;
         }
         /// <summary>
         /// grabs all items in a cart based on cartid

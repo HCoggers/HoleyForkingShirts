@@ -8,11 +8,7 @@
 
 @inject UserManager<ApplicationUser> UserManager
 @inject ICartManager  CartManager
-@{
-    Layout = "_Layout";
-    ViewData["Title"] = "Index";
-}
-    <main>
+
         <h1>Order Details:</h1>
 
         <p>
@@ -35,9 +31,6 @@
                 </tr>
             </thead>
             <tbody>
-                @*
-                    // It's not pretty, butt it works!
-                *@
                 @foreach (var item in CartManager.GetAllItems(CartManager.GetCart(UserManager.GetUserId(User)).Result.ID).Result)
                 {
                     <tr>
@@ -55,4 +48,7 @@
                 </tr>
             </tfoot>
         </table>
-    </main>
+        <form asp-action="Confirm" method="post">
+            <input hidden name="userId" value="@UserManager.GetUserId(User)" />
+            <button type="submit">Confirm and return to Shopping</button>
+        </form>

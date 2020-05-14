@@ -38,32 +38,44 @@ namespace HoleyForkingShirt.Pages.Cart
         /// <returns></returns>
         public async Task<IActionResult> OnGetAsync()
         {
-            var signedIn = _signInManager.IsSignedIn(User);
-            if (signedIn)
+            var userId = _userManager.GetUserId(User);
+            Models.Cart cart = await _cartManager.GetCart(userId);
+            List<CartItems> items = await _cartManager.GetAllItems(cart.ID);
+            if(items == null)
             {
-                var userId = _userManager.GetUserId(User);
-                Models.Cart cart = await _cartManager.GetCart(userId);
-                List<CartItems> items = await _cartManager.GetAllItems(cart.ID);
-                if(items == null)
-                {
-                    ModelState.AddModelError("", "You have no items in your cart.");
-                    return RedirectToPage("/Products/Shop");
-                }
-
-                foreach (var item in items)
-                {
-                    Total += (item.Product.Price * item.Qty);
-                }
-
-                InCart = items;
-                return Page();
-            }
-            else
-            {
-                ModelState.AddModelError("", "Please Login to view your Cart.");
-                return RedirectToPage("/Account/Login");
+                ModelState.AddModelError("", "You have no items in your cart.");
+                return RedirectToPage("/Products/Shop");
             }
 
+            foreach (var item in items)
+            {
+                Total += (item.Product.Price * item.Qty);
+            }
+
+            InCart = items;
+            return Page();
+        }
+        
+        public async Task<IActionResult> OnPostAsync(int productid)
+        {
+            var userId = _userManager.GetUserId(User);
+            Models.Cart cart = await _cartManager.GetCart(userId);
+
+            List<CartItems> items = _cartManager.GetAllItems(cart.ID).Result
+                .Where(i => i.ProductID != productid)
+                .ToList();
+
+            cart.CartItems = items;
+            await _cartManager.UpdateCart(cart.ID, cart);
+
+            foreach (var item in items)
+            {
+                Total += (item.Product.Price * item.Qty);
+            }
+
+            InCart = items;
+
+            return Page();
         }
     }
 }

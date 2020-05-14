@@ -7,8 +7,9 @@
 @model HoleyForkingShirt.Models.Product
 
 
-    <main class="details container">
+    <div class="details container">
         <div class="row">
+            <a class="back" asp-action="Index" asp-controller="Inventory">Manage Products</a>
             <div class="col-6">
                 <img class="productimage" src="@Model.Image" />
                 <h2 class="subtitle">@Model.Name</h2>
@@ -65,4 +66,4 @@
                 <button type="submit">Delete</button>
             </form>
         </div>
-    </main>
+    </div>
