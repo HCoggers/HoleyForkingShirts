@@ -36,8 +36,8 @@ Microsoft Visual Studio Community 2017 (Version 15.5.7)
 
 ## Recent Updates
 
-#### V 1.1
-*Site features personalized shopping Cart and Administrative Tools* - 3 May 2020
+#### V 1.2
+__*Sandbox Transactions and Order Details/Receipts*__ - 10 May 2020
 
 ---
 
@@ -65,20 +65,25 @@ attire, but also so that we can send you a complimentary $2 gift card for your b
 ## Usage
 
 ### Landing Page
-![Landing Page](/assets/landingpage_4-26-2020.PNG)
-
-### Shop Gallery
-![Shop Gallery](/assets/shoppage_4-26-2020.PNG)
-
-### Product Details
-![Product Details](/assets/detailspage_4-26-2020.PNG)
+![Landing Page](/assets/landingpage.PNG)
 
 ### Logging In
-![Logging In](/assets/loginpage_4-26-2020.PNG)
+![Logging In](/assets/loginpage.PNG)
+
+### Shop Gallery
+![Shop Gallery](/assets/shoppage.PNG)
+
+### Product Details
+![Product Details](/assets/detailspage.PNG)
+
+### Checkout Process
+![Logging In](/assets/checkout.PNG)
+
 
 ---
 
 ## Change Log
+- **1.2** | *Sandbox Transactions and Order Details/Receipts* - 10 May 2020
 - **1.1** | *Site features personalized shopping Cart and Administrative Tools* - 3 May 2020
 - **1.0** | *Site is pushed to production (no Transactions implemented)*  - 26 April 2020
 
